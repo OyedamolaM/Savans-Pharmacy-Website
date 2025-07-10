@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
-import { CartProvider } from './Context/CartContext';// ✅
+import { CartProvider } from './context/CartContext';// ✅
 import { SearchProvider } from './context/SearchContext'; // ✅
 
 ReactDOM.createRoot(document.getElementById('root')).render(
