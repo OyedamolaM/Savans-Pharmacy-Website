@@ -1,34 +1,37 @@
-@use './variables' as *;
+@use 'sass:color';
+@use 'sass:map';
+@use './variables' as variables;
 
 @mixin respond($breakpoint) {
-  @if $breakpoint == sm {
-    @media (max-width: 576px) { @content; }
-  } @else if $breakpoint == md {
-    @media (max-width: 768px) { @content; }
-  } @else if $breakpoint == lg {
-    @media (max-width: 992px) { @content; }
-  } @else if $breakpoint == xl {
-    @media (max-width: 1200px) { @content; }
+  $size: map.get(variables.$breakpoints, $breakpoint);
+
+  @if $size {
+    @media (max-width: $size) {
+      @content;
+    }
+  } @else {
+    @warn "⚠️ Breakpoint `#{$breakpoint}` not found in \$breakpoints map.";
   }
 }
 
 @mixin flex-center {
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
 }
 
 @mixin button-style {
-  background-color: $primary-color;
-  color: $text-color;
+  background-color: variables.$primary-color;
+  color: variables.$text-color;
   border: none;
-  padding: 0.75rem 1.5rem;
-  border-radius: 5px;
-  font-weight: 500;
+  padding: 0.6rem 1.2rem;
+  font-weight: bold;
+  border-radius: 4px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: background-color 0.3s ease;
 
   &:hover {
-    background-color: $hover-color;
+    background-color: color.adjust(variables.$primary-color, $lightness: -10%);
+    color: white;
   }
 }

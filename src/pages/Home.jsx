@@ -1,46 +1,40 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
+import products from '../data/products';
+import ProductCard from '../components/ProductCard';
 import './Home.scss';
 
-const featuredProducts = [
-  {
-    id: 1,
-    name: 'Paracetamol Tablets',
-    price: '₦500',
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 2,
-    name: 'Vitamin C 1000mg',
-    price: '₦1200',
-    image: 'https://via.placeholder.com/150'
-  },
-  {
-    id: 3,
-    name: 'Antiseptic Cream',
-    price: '₦850',
-    image: 'https://via.placeholder.com/150'
-  },
-];
-
 function Home() {
+  const featured = products.slice(0, 8);
+
   return (
-    <div className="home">
+    <div className="home-page">
+      {/* Hero Section */}
       <section className="hero">
-        <h1>Welcome to Savans Pharmacy</h1>
-        <p>Your health, our priority.</p>
-        <Link to="/products" className="shop-btn">Shop Now</Link>
+        <div className="hero-content">
+          <h1>Welcome to Savans Pharmacy</h1>
+          <p>Trusted health care, delivered to your doorstep.</p>
+          <Link to="/products" className="shop-now-btn">Shop Now</Link>
+        </div>
       </section>
 
-      <section className="featured">
+      {/* Featured Products */}
+      <section className="featured-products">
         <h2>Featured Products</h2>
         <div className="product-grid">
-          {featuredProducts.map(product => (
-            <div className="product-card" key={product.id}>
-              <img src={product.image} alt={product.name} />
-              <h3>{product.name}</h3>
-              <p>{product.price}</p>
-            </div>
+          {featured.map((product, index) => (
+            <ProductCard
+              key={product.id}
+              product={{
+                ...product,
+                badge: index === 1 || index === 4 ? 'Best Seller' : null
+              }}
+            />
           ))}
+        </div>
+
+        <div className="view-all">
+          <Link to="/products" className="view-all-btn">View All Products</Link>
         </div>
       </section>
     </div>

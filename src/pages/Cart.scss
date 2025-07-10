@@ -1,0 +1,74 @@
+@use "sass:color";
+
+.cart-page {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+    font-size: 2rem;
+  }
+
+  p {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+  }
+
+  .cart-items {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+      gap: 1rem;
+
+      img {
+        width: 80px;
+        height: 80px;
+        object-fit: cover;
+        border-radius: 6px;
+      }
+
+      .item-info {
+        flex: 1;
+
+        h4 {
+          margin: 0 0 0.5rem;
+          font-size: 1.1rem;
+        }
+
+        p {
+          margin: 0.2rem 0;
+          font-size: 0.95rem;
+          color: #444;
+        }
+      }
+
+      button {
+        background-color: #7851A9;
+        color: white;
+        border: none;
+        padding: 0.4rem 0.9rem;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 0.85rem;
+
+        &:hover {
+          background-color: color.adjust(#7851A9, $lightness: -10%);
+        }
+      }
+    }
+  }
+}

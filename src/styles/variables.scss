@@ -1,8 +1,15 @@
-// Brand Colors
+// src/styles/_variables.scss
 $primary-color: #7851A9;
 $text-color: #ffffff;
-$hover-color: #d3c6f3;
-$background-color: #f9f9f9;
+$hover-color: #5a3791;
+
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+);
 
 // Typography
 $font-family: 'Segoe UI', sans-serif;
+

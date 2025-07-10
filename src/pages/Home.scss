@@ -1,69 +1,79 @@
-@use '../styles/variables' as *;
-@use '../styles/mixins' as *;
+@use "sass:color";
 
-.home {
-  padding: 2rem;
-
+.home-page {
   .hero {
+    background: linear-gradient(to right, #7851A9, #9D7AD8);
+    color: white;
+    padding: 5rem 2rem;
     text-align: center;
-    background-color: $primary-color;
-    color: $text-color;
-    padding: 4rem 2rem;
-    border-radius: 8px;
 
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 2rem;
-    }
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
 
-    .shop-btn {
-      @include button-style;
+      p {
+        font-size: 1.25rem;
+        margin-bottom: 2rem;
+      }
+
+      .shop-now-btn {
+        background-color: white;
+        color: #7851A9;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: 0.3s ease;
+
+        &:hover {
+          background-color: #eee;
+        }
+      }
     }
   }
 
-  .featured {
-    margin-top: 4rem;
+  .featured-products {
+    padding: 3rem 2rem;
+    background-color: #f8f8f8;
 
     h2 {
       text-align: center;
       margin-bottom: 2rem;
-      font-size: 1.8rem;
-      color: $primary-color;
+      font-size: 2rem;
+      color: #333;
     }
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-      .product-card {
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        padding: 1rem;
-        text-align: center;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    .view-all {
+      text-align: center;
+      margin-top: 2.5rem;
 
-        img {
-          width: 100%;
-          height: 150px;
-          object-fit: cover;
-          margin-bottom: 1rem;
-        }
+      .view-all-btn {
+        background-color: #7851A9;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        border: none;
+        border-radius: 6px;
+        text-decoration: none;
+        transition: 0.3s ease;
 
-        h3 {
-          margin-bottom: 0.5rem;
-          font-size: 1.1rem;
-        }
-
-        p {
-          color: $primary-color;
-          font-weight: bold;
+        &:hover {
+          background-color: color.adjust(#7851A9, $lightness: -10%);
         }
       }
     }
