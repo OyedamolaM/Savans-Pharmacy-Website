@@ -1,11 +1,13 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState, useContext } from 'react';
 import { SearchContext } from '../context/SearchContext';
+import { CartContext } from '../context/CartContext'; // ✅ ADD THIS
 import './Navbar.scss';
 
 function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const { searchTerm, setSearchTerm } = useContext(SearchContext);
+  const { cartItems } = useContext(CartContext); // ✅ USE THIS
   const navigate = useNavigate();
 
   const handleSearchKey = (e) => {
@@ -38,7 +40,11 @@ function Navbar() {
       <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
         <li><Link to="/">Home</Link></li>
         <li><Link to="/products">Products</Link></li>
-        <li><Link to="/cart">Cart</Link></li>
+        <li>
+          <Link to="/cart">
+            Cart ({cartItems.length}) {/* ✅ Shows cart count */}
+          </Link>
+        </li>
         <li><Link to="/login">Login</Link></li>
 
         {/* Mobile-only search bar */}

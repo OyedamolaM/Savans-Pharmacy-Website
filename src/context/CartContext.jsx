@@ -36,9 +36,25 @@ export function CartProvider({ children }) {
     setCartItems([]);
   };
 
+  const getTotalPrice = () => {
+    return cartItems.reduce((total, item) => {
+      const numericPrice = typeof item.price === 'string'
+        ? parseFloat(item.price.replace(/[^\d.]/g, ''))
+        : item.price;
+      return total + numericPrice * item.quantity;
+    }, 0);
+  };
+
   return (
     <CartContext.Provider
-      value={{ cartItems, addToCart, removeFromCart, updateQuantity, clearCart }}
+      value={{
+        cartItems,
+        addToCart,
+        removeFromCart,
+        updateQuantity,
+        clearCart,
+        getTotalPrice
+      }}
     >
       {children}
     </CartContext.Provider>

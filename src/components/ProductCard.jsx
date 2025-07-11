@@ -10,7 +10,7 @@ function ProductCard({ product }) {
       {product.badge && <span className="badge">{product.badge}</span>}
       <img src={product.image} alt={product.name} />
       <h3>{product.name}</h3>
-      <p className="price">{product.price}</p>
+      <p className="price">₦{product.price.toLocaleString()}</p>
       <button onClick={() => addToCart(product)}>Add to Cart</button>
     </div>
   );

@@ -1,0 +1,60 @@
+@use "sass:color";
+
+.checkout-page {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  text-align: center;
+
+  h2 {
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+
+  p {
+    color: #666;
+    margin-bottom: 1.5rem;
+  }
+
+  .login-btn,
+  .continue-btn {
+    background-color: #7851a9;
+    color: white;
+    border: none;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 1rem;
+
+    &:hover {
+      background-color: color.adjust(#7851a9, $lightness: -10%);
+    }
+  }
+
+  .checkout-items {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eee;
+      font-size: 1rem;
+    }
+  }
+
+  .checkout-total {
+    margin-bottom: 1.5rem;
+
+    h3 {
+      font-size: 1.4rem;
+      color: #333;
+    }
+  }
+}

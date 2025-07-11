@@ -1,4 +1,4 @@
-const products = [
+const rawProducts = [
   { id: 1, name: "Paracetamol Tablets", price: "₦1500", image: "https://via.placeholder.com/150" },
   { id: 2, name: "Ibuprofen Syrup", price: "₦850", image: "https://via.placeholder.com/150" },
   { id: 3, name: "Amoxicillin Capsules", price: "₦2300", image: "https://via.placeholder.com/150" },
@@ -101,5 +101,11 @@ const products = [
   { id: 100, name: "Antiviral Tablets", price: "₦4800", image: "https://via.placeholder.com/150" }
 ];
 
+const products = rawProducts.map(product => ({
+  ...product,
+  price: parseFloat(product.price.replace(/[^\d.]/g, '')) // Remove ₦ or N
+}));
+
 export default products;
+
 
