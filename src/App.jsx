@@ -4,7 +4,8 @@ import Home from './pages/Home';
 import Products from './pages/Products';
 import Cart from './pages/Cart';
 import Login from './pages/Login';
-import Checkout from './pages/Checkout'; // ✅ Add this import
+import Checkout from './pages/Checkout';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
   return (

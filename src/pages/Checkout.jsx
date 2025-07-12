@@ -41,7 +41,10 @@ function Checkout() {
             <h3>Total: ₦{getTotalPrice().toLocaleString()}</h3>
           </div>
 
-          <button className="continue-btn" onClick={() => alert('Next step: Shipping / Payment (not implemented)')}>
+          <button
+            className="continue-btn"
+            onClick={() => alert('✅ Step 11 Coming Soon: Shipping / Payment')}
+          >
             Continue to Payment
           </button>
         </>

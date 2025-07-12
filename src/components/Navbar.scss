@@ -66,6 +66,25 @@
       }
     }
 
+    .user-info {
+      font-weight: bold;
+      color: $text-color;
+    }
+
+    .logout-btn {
+      background: transparent;
+      border: none;
+      color: $text-color;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 1rem;
+
+      &:hover {
+        color: $hover-color;
+        text-decoration: underline;
+      }
+    }
+
     .mobile-search {
       display: none;
     }
@@ -109,6 +128,16 @@
           border: none;
           margin-top: 0.5rem;
         }
+      }
+
+      .logout-btn {
+        text-align: left;
+        width: 100%;
+      }
+
+      .user-info {
+        width: 100%;
+        text-align: left;
       }
     }
   }
