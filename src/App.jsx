@@ -6,6 +6,8 @@ import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Checkout from './pages/Checkout';
 import PrivateRoute from './components/PrivateRoute';
+import ShippingPayment from './pages/ShippingPayment';
+import OrderConfirmation from './pages/OrderConfirmation';
 
 function App() {
   return (
@@ -17,6 +19,14 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/checkout" element={<Checkout />} /> {/* ✅ Add this route */}
         <Route path="/login" element={<Login />} />
+        <Route
+  path="/shipping-payment"
+  element={<PrivateRoute>
+          <ShippingPayment />
+          </PrivateRoute>
+          }/>
+        <Route path="/order-confirmation" element={<OrderConfirmation />} />
+
       </Routes>
     </Router>
   );

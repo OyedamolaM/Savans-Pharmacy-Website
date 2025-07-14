@@ -43,9 +43,26 @@
     li {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 0.6rem 0;
       border-bottom: 1px solid #eee;
       font-size: 1rem;
+
+      .item-name {
+        flex: 1;
+        text-align: left;
+      }
+
+      .item-detail {
+        width: 140px;
+        text-align: center;
+      }
+
+      .item-subtotal {
+        width: 100px;
+        text-align: right;
+        font-weight: 600;
+      }
     }
   }
 
