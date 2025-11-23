@@ -1,15 +1,15 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
-import Cart from './pages/cart';
+import Cart from './pages/Cart';
 import Login from './pages/Login';
 import Register from './pages/Register';
-import Home from './pages/home';
+import Home from './pages/Home';
 import Dashboard from './pages/Customer/Dashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
-import PrivateRoute from './components/privateRoute';
+import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
   return (
