@@ -1,0 +1,94 @@
+/* ================= GLOBAL STYLES ================= */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+/* Import variables and mixins */
+@import './variables';
+@import './mixins';
+
+/* Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Root variables for responsive typography */
+:root {
+  --font-h1: 2.4rem;
+  --font-h2: 2rem;
+  --font-h3: 1.5rem;
+  --font-body: 1rem;
+  --font-small: 0.9rem;
+}
+
+@media (max-width: $breakpoint-md) {
+  :root {
+    --font-h1: 2rem;
+    --font-h2: 1.6rem;
+    --font-h3: 1.3rem;
+    --font-body: 0.95rem;
+    --font-small: 0.85rem;
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  :root {
+    --font-h1: 1.8rem;
+    --font-h2: 1.4rem;
+    --font-h3: 1.1rem;
+    --font-body: 0.9rem;
+    --font-small: 0.8rem;
+  }
+}
+
+/* Global body styles */
+body {
+  font-family: $font-primary;
+  font-size: var(--font-body);
+  line-height: 1.6;
+  color: $text-primary;
+  background-color: $background-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-primary;
+  color: $text-primary;
+  line-height: 1.2;
+  margin-bottom: $space-sm;
+}
+
+h1 { font-size: var(--font-h1); }
+h2 { font-size: var(--font-h2); }
+h3 { font-size: var(--font-h3); }
+
+/* Links & Buttons */
+a { text-decoration: none; color: inherit; }
+button { font-family: $font-primary; cursor: pointer; }
+
+/* Images */
+img { max-width: 100%; display: block; }
+
+/* Inputs */
+input, textarea, select {
+  font-family: $font-primary;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: $space-sm;
+  background: $surface-color;
+}
+
+/* Section padding */
+section { padding: 20px 20px; }
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}

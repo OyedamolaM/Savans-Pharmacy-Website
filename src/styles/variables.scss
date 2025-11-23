@@ -1,0 +1,69 @@
+/* ================= VARIABLES ================= */
+
+/* 🎨 Colors */
+/* ================= COLORS ================= */
+
+/* Primary Colors */
+$primary-color: #4e0781;        // main purple
+$primary-light: #6a21a0;        // lighter purple for hover/background
+$primary-dark: #35055a;         // darker purple for buttons/hover
+
+/* Accent / Secondary */
+$accent-color: #e90979;         // pink highlight
+$accent-light: lighten($accent-color, 20%);
+$accent-dark: darken($accent-color, 10%);
+
+/* Backgrounds / Surfaces */
+$background-color: #ffffff;     // main page background
+$surface-color: #f9f9f9;        // cards, sections
+$overlay-color: rgba(0, 0, 0, 0.05); // subtle overlay for modals/cards
+
+/* Borders / Lines */
+$border-color: #e0e0e0;         // default borders
+$border-light: #f0f0f0;         // lighter border for subtle separation
+$border-dark: #c0c0c0;          // stronger border for cards, inputs
+
+/* Text Colors */
+$text-primary: #333333;         // main text
+$text-secondary: #777777;       // muted text
+$text-light: #aaaaaa;           // subtle text (placeholder)
+$text-inverse: #ffffff;         // text on primary/accent backgrounds
+
+/* State Colors */
+$success-color: #28a745;        // success messages, buttons
+$warning-color: #ffc107;        // warnings
+$error-color: #dc3545;          // error messages
+$info-color: #17a2b8;           // info messages, alerts
+
+/* 🎯 Typography */
+$font-primary: 'Roboto', sans-serif;
+
+$font-size-xs: 12px;
+$font-size-sm: 14px;
+$font-size-md: 16px;
+$font-size-lg: 20px;
+$font-size-xl: 28px;
+$font-size-xxl: 36px;
+
+/* 📏 Spacing & Border */
+$space-xs: 5px;
+$space-sm: 10px;
+$space-md: 20px;
+$space-lg: 40px;
+
+$border-radius: 12px;
+
+/* 📐 Layout Breakpoints */
+$breakpoint-sm: 480px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;
+
+/* 🖤 Z-Index */
+$z-dropdown: 1000;
+$z-modal: 1050;
+$z-tooltip: 1100;
+
+/* 🌫️ Shadows */
+$shadow-light: 0px 2px 6px rgba(0, 0, 0, 0.05);
+$shadow-medium: 0px 5px 15px rgba(0, 0, 0, 0.1);
+$shadow-heavy: 0px 10px 30px rgba(0, 0, 0, 0.2);

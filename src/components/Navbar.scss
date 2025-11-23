@@ -1,0 +1,132 @@
+@import '../styles/global.scss';
+
+.navbar {
+  width: 100%;
+  background: $background-color;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: $space-sm $space-lg;
+  border-bottom: 1px solid $border-color;
+  position: relative;
+  z-index: $z-dropdown;
+
+  .logo a {
+    font-size: 22px;
+    font-weight: 700;
+    color: $primary-color;
+    text-decoration: none;
+  }
+
+  ul.nav-links {
+    display: flex;
+    gap: $space-lg;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    li {
+      list-style: none;
+
+      a {
+        font-size: 16px;
+        color: $text-primary;
+        text-decoration: none;
+        font-weight: 500;
+        transition: 0.3s;
+
+        &:hover {
+          color: $accent-color;
+        }
+      }
+    }
+  }
+
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 18px;
+    cursor: pointer;
+    z-index: $z-dropdown + 1;
+
+    span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background: $text-primary;
+      border-radius: 2px;
+      transition: 0.3s;
+    }
+  }
+}
+
+/* ================= RESPONSIVE MOBILE ================= */
+@media (max-width: 768px) {
+  .navbar {
+    .hamburger {
+      display: flex;
+    }
+
+    ul.nav-links {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      width: 200px; // compact width
+      max-height: 0;
+      overflow: hidden;
+      flex-direction: column;
+      background: $background-color;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      box-shadow: -2px 4px 12px rgba(0, 0, 0, 0.1);
+      transition: max-height 0.3s ease;
+      z-index: $z-dropdown + 1;
+      gap: $space-xs;
+
+      li {
+        width: 100%;
+        text-align: left;
+        padding: 0.05rem 1rem;
+        border-bottom: 1px solid $border-color;
+
+        a {
+          width: 100%;
+          display: block;
+          font-size: 16px;
+        }
+
+        &:last-child {
+          border-bottom: none; // remove border from last item
+        }
+      }
+
+      &.active {
+        max-height: 350px; // adjust based on number of links
+      }
+    }
+
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translateY(7px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translateY(-7px);
+    }
+  }
+}
+
+/* ================= HOVER EFFECT ================= */
+.navbar ul.nav-links li a {
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.navbar ul.nav-links li a:hover {
+  background: $accent-light;
+}
