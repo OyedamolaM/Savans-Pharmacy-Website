@@ -12,13 +12,14 @@ const AdminHome = () => {
   });
 
   const token = localStorage.getItem("token");
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
 
   useEffect(() => {
     const fetchAdminStats = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/admin/stats",
+          "http://localhost:5000/api/admin/analytics",
           axiosConfig
         );
         setStats(data);
@@ -28,7 +29,7 @@ const AdminHome = () => {
     };
 
     fetchAdminStats();
-  }, []);
+  }, [axiosConfig]);
 
   return (
     <div style={{ padding: "20px" }}>
