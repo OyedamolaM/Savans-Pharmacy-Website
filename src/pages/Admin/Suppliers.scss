@@ -1,0 +1,199 @@
+@import "../../styles/global.scss";
+
+.suppliers-page {
+  padding: 20px;
+}
+
+.suppliers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.suppliers-error {
+  color: $error-color;
+  margin-bottom: 16px;
+}
+
+.suppliers-table {
+  background: $surface-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.suppliers-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $border-light;
+}
+
+.suppliers-row:last-of-type {
+  border-bottom: none;
+}
+
+.suppliers-row.header {
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.primary-button,
+.ghost-button,
+.danger-button {
+  padding: 8px 12px;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  background: $background-color;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: $primary-color;
+  color: $text-inverse;
+  border: none;
+}
+
+.danger-button {
+  border-color: $error-color;
+  color: $error-color;
+  background: transparent;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 18, 28, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: $z-modal;
+}
+
+.modal {
+  background: $surface-color;
+  width: min(760px, 96vw);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: $text-secondary;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.modal-close:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.modal-body {
+  padding: 20px 24px 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.modal-body label {
+  display: grid;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: $background-color;
+}
+
+.modal-body button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: $primary-color;
+  color: $text-inverse;
+  font-weight: 600;
+}
+
+.modal-body button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.modal-body .ghost-button {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: $text-primary;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.muted {
+  color: $text-secondary;
+}
+
+@media (max-width: 768px) {
+  .suppliers-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 14px;
+  }
+}

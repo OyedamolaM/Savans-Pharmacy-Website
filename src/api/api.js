@@ -3,6 +3,12 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api'; // replace with deployed URL later
 
+const authHeaders = () => {
+  const token = localStorage.getItem("token");
+  if (!token) throw new Error("No token found, please log in");
+  return { Authorization: `Bearer ${token}` };
+};
+
 // Products
 export const getProducts = () => axios.get(`${API_URL}/products`);
 export const getProduct = (id) => axios.get(`${API_URL}/products/${id}`);
@@ -14,13 +20,50 @@ export const loginUser = (data) => axios.post(`${API_URL}/auth/login`, data);
 // Wishlist
 
 export const getWishlist = async () => {
-  const token = localStorage.getItem("token"); // token stored on login
-  if (!token) throw new Error("No token found, please log in");
-
-  return axios.get("http://localhost:5000/api/wishlist", {
-    headers: { Authorization: `Bearer ${token}` },
+  return axios.get(`${API_URL}/wishlist`, {
+    headers: authHeaders(),
   });
 };
+
+// Cart
+export const getCart = () =>
+  axios.get(`${API_URL}/cart`, {
+    headers: authHeaders(),
+  });
+
+export const addToCart = (productId, quantity = 1) =>
+  axios.post(
+    `${API_URL}/cart`,
+    { productId, quantity },
+    { headers: authHeaders() }
+  );
+
+export const updateCartItem = (productId, quantity) =>
+  axios.put(
+    `${API_URL}/cart/${productId}`,
+    { quantity },
+    { headers: authHeaders() }
+  );
+
+export const removeFromCart = (productId) =>
+  axios.delete(`${API_URL}/cart/${productId}`, {
+    headers: authHeaders(),
+  });
+
+export const clearCart = () =>
+  axios.delete(`${API_URL}/cart`, {
+    headers: authHeaders(),
+  });
+
+export const createOrder = (payload) =>
+  axios.post(`${API_URL}/orders`, payload, {
+    headers: authHeaders(),
+  });
+
+export const getProfile = () =>
+  axios.get(`${API_URL}/user/profile`, {
+    headers: authHeaders(),
+  });
 
 
 // Add more endpoints as needed

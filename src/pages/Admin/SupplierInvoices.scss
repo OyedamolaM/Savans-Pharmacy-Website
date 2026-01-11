@@ -1,0 +1,260 @@
+@import "../../styles/global.scss";
+
+.supplier-invoices-page {
+  padding: 20px;
+}
+
+.supplier-invoices-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.supplier-invoices-error {
+  color: $error-color;
+  margin-bottom: 16px;
+}
+
+.invoice-list {
+  background: $surface-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.invoice-row {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr 1fr 1fr 1fr 1.5fr;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid $border-light;
+}
+
+.invoice-row.header {
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.status {
+  text-transform: capitalize;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 0.85rem;
+  background: $background-color;
+}
+
+.status.paid {
+  color: #0f6c3c;
+  background: rgba(15, 108, 60, 0.12);
+}
+
+.status.partial {
+  color: #9a6b00;
+  background: rgba(154, 107, 0, 0.12);
+}
+
+.status.unpaid {
+  color: #a62d1c;
+  background: rgba(166, 45, 28, 0.12);
+}
+
+.status.overdue {
+  color: #8b1b1b;
+  background: rgba(139, 27, 27, 0.12);
+}
+
+.row-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.primary-button,
+.ghost-button,
+.link-button {
+  padding: 8px 12px;
+  border-radius: $border-radius;
+  border: 1px solid $border-color;
+  background: $background-color;
+  cursor: pointer;
+}
+
+.primary-button {
+  background: $primary-color;
+  color: $text-inverse;
+  border: none;
+}
+
+.link-button {
+  background: transparent;
+  border: none;
+  color: $accent-color;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 18, 28, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: $z-modal;
+}
+
+.modal {
+  background: $surface-color;
+  width: min(820px, 96vw);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: $text-secondary;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.modal-close:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.modal-body {
+  padding: 20px 24px 24px;
+  display: grid;
+  gap: 16px;
+}
+
+.modal-body label {
+  display: grid;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: $background-color;
+}
+
+.modal-body button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: $primary-color;
+  color: $text-inverse;
+  font-weight: 600;
+}
+
+.modal-body button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.modal-body .ghost-button {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: $text-primary;
+}
+
+.modal-body .link-button {
+  background: transparent;
+  border: none;
+  color: $accent-color;
+  padding: 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.form-grid .full-width {
+  grid-column: 1 / -1;
+}
+
+.line-items {
+  display: grid;
+  gap: 12px;
+}
+
+.line-items-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.line-item {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.invoice-totals {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  font-weight: 600;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.muted {
+  color: $text-secondary;
+}
+
+@media (max-width: 900px) {
+  .invoice-row {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .line-item {
+    grid-template-columns: 1fr;
+  }
+
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 14px;
+  }
+}

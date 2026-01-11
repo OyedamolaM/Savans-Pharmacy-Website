@@ -1,0 +1,50 @@
+@import "../../styles/global.scss";
+
+.activity-page {
+  padding: 20px;
+}
+
+.activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.activity-table {
+  background: $surface-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.activity-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 0.7fr 1fr 2fr 1fr;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $border-light;
+}
+
+.activity-row.header {
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.muted {
+  color: $text-secondary;
+}
+
+.error {
+  color: $error-color;
+}
+
+@media (max-width: 900px) {
+  .activity-row {
+    grid-template-columns: 1fr;
+  }
+}

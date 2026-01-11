@@ -10,6 +10,8 @@ const AdminDashboardLayout = () => {
     const handleLogout = () => {
       localStorage.removeItem("token");
       localStorage.removeItem("user"); // optional
+      localStorage.removeItem("role");
+      localStorage.removeItem("name");
       navigate("/login");
     };
   return (
@@ -19,9 +21,13 @@ const AdminDashboardLayout = () => {
         <h2>Admin Panel</h2>
         <nav>
           <Link to="/admin/">Dashboard</Link>
-          <Link to="/admin/products">Products</Link>
           <Link to="/admin/orders">Orders</Link>
-          <Link to="/admin/users">Users</Link>
+          <Link to="/admin/customers">Customers</Link>
+          <Link to="/admin/staff">Staff</Link>
+          <Link to="/admin/branches">Branches</Link>
+          <Link to="/admin/inventory">Inventory</Link>
+          <Link to="/admin/activity">Activity</Link>
+          <Link to="/">View Store</Link>
 
           <button className="sidebar-logout" onClick={handleLogout}>
             Logout

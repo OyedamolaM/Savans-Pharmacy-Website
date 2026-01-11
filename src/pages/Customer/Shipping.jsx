@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./Account.scss";
 
 const Shipping = () => {
   const [addresses, setAddresses] = useState([]);
@@ -84,102 +85,100 @@ const Shipping = () => {
     }
   };
 
-  if (loading) return <p>Loading shipping addresses...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="account-muted">Loading shipping addresses...</p>;
+  if (error) return <p className="account-muted">{error}</p>;
 
   return (
-    <div style={{ maxWidth: "600px", margin: "0 auto" }}>
+    <div className="account-section">
       <h2>Shipping Addresses</h2>
-      {success && <p style={{ color: "green" }}>{success}</p>}
+      {success && <p className="account-muted">{success}</p>}
 
-      {addresses.length === 0 && <p>No addresses yet.</p>}
+      {addresses.length === 0 && <p className="account-muted">No addresses yet.</p>}
 
-      {addresses.map((addr) => (
-        <div
-          key={addr._id}
-          style={{
-            border: "1px solid #ddd",
-            padding: "10px",
-            marginBottom: "10px",
-            borderRadius: "6px",
-          }}
-        >
-          <p>
-            {addr.fullName}, {addr.addressLine1} {addr.addressLine2},{" "}
-            {addr.city}, {addr.state}, {addr.country} - {addr.postalCode}
-          </p>
-          <p>Phone: {addr.phone}</p>
-          <button onClick={() => handleRemoveAddress(addr._id)}>Remove</button>
-        </div>
-      ))}
+      <div className="account-grid">
+        {addresses.map((addr) => (
+          <div key={addr._id} className="account-card">
+            <p>
+              {addr.fullName}, {addr.addressLine1} {addr.addressLine2},{" "}
+              {addr.city}, {addr.state}, {addr.country} - {addr.postalCode}
+            </p>
+            <p className="account-muted">Phone: {addr.phone}</p>
+            <button className="account-btn" onClick={() => handleRemoveAddress(addr._id)}>
+              Remove
+            </button>
+          </div>
+        ))}
+      </div>
 
       <h3>Add New Address</h3>
-      <form onSubmit={handleAddAddress}>
-        <input
-          placeholder="Full Name"
-          value={newAddress.fullName}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, fullName: e.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="Address Line 1"
-          value={newAddress.addressLine1}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, addressLine1: e.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="Address Line 2"
-          value={newAddress.addressLine2}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, addressLine2: e.target.value })
-          }
-        />
-        <input
-          placeholder="City"
-          value={newAddress.city}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, city: e.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="State"
-          value={newAddress.state}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, state: e.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="Country"
-          value={newAddress.country}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, country: e.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="Postal Code"
-          value={newAddress.postalCode}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, postalCode: e.target.value })
-          }
-          required
-        />
-        <input
-          placeholder="Phone"
-          value={newAddress.phone}
-          onChange={(e) =>
-            setNewAddress({ ...newAddress, phone: e.target.value })
-          }
-          required
-        />
-        <button type="submit">Add Address</button>
-      </form>
+      <div className="account-card">
+        <form onSubmit={handleAddAddress} className="account-form">
+          <input
+            placeholder="Full Name"
+            value={newAddress.fullName}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, fullName: e.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Address Line 1"
+            value={newAddress.addressLine1}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, addressLine1: e.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Address Line 2"
+            value={newAddress.addressLine2}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, addressLine2: e.target.value })
+            }
+          />
+          <input
+            placeholder="City"
+            value={newAddress.city}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, city: e.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="State"
+            value={newAddress.state}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, state: e.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Country"
+            value={newAddress.country}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, country: e.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Postal Code"
+            value={newAddress.postalCode}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, postalCode: e.target.value })
+            }
+            required
+          />
+          <input
+            placeholder="Phone"
+            value={newAddress.phone}
+            onChange={(e) =>
+              setNewAddress({ ...newAddress, phone: e.target.value })
+            }
+            required
+          />
+          <button type="submit" className="account-btn">Add Address</button>
+        </form>
+      </div>
     </div>
   );
 };

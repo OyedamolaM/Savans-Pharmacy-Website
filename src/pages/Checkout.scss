@@ -1,0 +1,179 @@
+@import '../styles/global.scss';
+
+.checkout-page {
+  padding: 1.5rem;
+  font-family: $font-primary;
+}
+
+.checkout-hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 1.5rem;
+  border-radius: $border-radius;
+  background: linear-gradient(120deg, $primary-color, $primary-light);
+  color: $text-inverse;
+  box-shadow: $shadow-medium;
+
+  h1 {
+    margin-bottom: 0.4rem;
+    color: $text-inverse;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+.checkout-status {
+  margin: 1.5rem 0;
+  text-align: center;
+  font-weight: 600;
+  color: $text-secondary;
+
+  &.error {
+    color: $error-color;
+  }
+}
+
+.checkout-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.checkout-form,
+.checkout-summary {
+  background: $surface-color;
+  border-radius: $border-radius;
+  padding: 1.5rem;
+  box-shadow: $shadow-light;
+}
+
+.checkout-form {
+  display: grid;
+  gap: 1rem;
+
+  h2 {
+    margin-bottom: 0.2rem;
+  }
+
+  select {
+    padding: 0.7rem 0.9rem;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    background: $background-color;
+  }
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.8rem;
+
+  input {
+    padding: 0.7rem 0.9rem;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    background: $background-color;
+  }
+}
+
+.checkout-summary {
+  h2 {
+    margin-bottom: 1rem;
+  }
+}
+
+.summary-items {
+  display: grid;
+  gap: 0.8rem;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px dashed $border-color;
+  padding-bottom: 0.6rem;
+
+  p {
+    margin-bottom: 0.2rem;
+    font-weight: 600;
+  }
+
+  span {
+    color: $text-secondary;
+    font-size: 0.9rem;
+  }
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 1.1rem;
+}
+
+.checkout-empty {
+  margin-top: 2rem;
+  text-align: center;
+  padding: 3rem 1.5rem;
+  border-radius: $border-radius;
+  background: $surface-color;
+  box-shadow: $shadow-light;
+}
+
+.primary-btn,
+.outline-btn {
+  border: none;
+  border-radius: $border-radius;
+  padding: 0.7rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.primary-btn {
+  background: $accent-color;
+  color: $text-inverse;
+
+  &:hover {
+    background: $accent-dark;
+  }
+}
+
+.outline-btn {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  color: $text-inverse;
+
+  &:hover {
+    border-color: $text-inverse;
+  }
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (min-width: 900px) {
+  .checkout-grid {
+    grid-template-columns: 2fr 1fr;
+    align-items: start;
+  }
+
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 700px) {
+  .checkout-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

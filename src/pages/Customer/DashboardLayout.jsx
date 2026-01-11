@@ -8,6 +8,8 @@ const DashboardLayout = () => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user"); // optional
+    localStorage.removeItem("role");
+    localStorage.removeItem("name");
     navigate("/login");
   };
 
@@ -18,6 +20,7 @@ const DashboardLayout = () => {
         <h2>Savans Account</h2>
 
         <nav>
+          <Link to="/">Back to Store</Link>
           <Link to="/dashboard">Overview</Link>
           <Link to="/dashboard/orders">My Orders</Link>
           <Link to="/dashboard/wishlist">Wishlist</Link>

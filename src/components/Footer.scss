@@ -1,0 +1,255 @@
+@import '../styles/global.scss';
+
+.site-footer {
+  margin-top: 3rem;
+  padding: 2.5rem 1.5rem 1.5rem;
+  background: linear-gradient(180deg, $primary-dark, $primary-color);
+  color: $text-inverse;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-brand {
+  h3 {
+    font-size: 1.4rem;
+    margin-bottom: 0.75rem;
+    color: $text-inverse;
+  }
+
+  p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 1rem;
+  }
+}
+
+.footer-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  span {
+    background: rgba(255, 255, 255, 0.16);
+    padding: 0.35rem 0.7rem;
+    border-radius: 999px;
+    font-size: 0.8rem;
+  }
+}
+
+.footer-links,
+.footer-contact {
+  h4,
+  .footer-contact-toggle {
+    margin-bottom: 0.75rem;
+    color: $text-inverse;
+  }
+
+  ul {
+    list-style: none;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    transition: 0.2s ease;
+
+    &:hover {
+      color: $accent-light;
+    }
+  }
+
+  p {
+    margin-bottom: 0.35rem;
+    color: rgba(255, 255, 255, 0.8);
+  }
+}
+
+.footer-contact-links {
+  display: grid;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+
+  a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+    font-weight: 600;
+
+    &:hover {
+      color: $accent-light;
+    }
+  }
+}
+
+.footer-contact-row {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.footer-hours {
+  display: grid;
+  gap: 0.3rem;
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 2rem auto 0;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+
+  p {
+    color: rgba(255, 255, 255, 0.7);
+  }
+}
+
+.footer-socials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem;
+  width: 100%;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: $border-radius;
+  background: rgba(255, 255, 255, 0.08);
+  text-decoration: none;
+  transition: 0.2s ease;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.18);
+  }
+}
+
+.social-icon {
+  width: 34px;
+  height: 34px;
+  display: grid;
+  place-items: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.15);
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+}
+
+.social-text {
+  color: $text-inverse;
+  font-size: 0.9rem;
+}
+
+.social-link.instagram {
+  color: #e1306c;
+}
+
+.social-link.x {
+  color: #ffffff;
+}
+
+.social-link.facebook {
+  color: #1877f2;
+}
+
+@media (max-width: 700px) {
+  .site-footer {
+    padding: 2rem 1rem 1.25rem;
+  }
+
+  .footer-top {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+  }
+
+  .footer-brand {
+    grid-column: 1 / -1;
+  }
+
+  .footer-contact-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 0.8rem;
+    align-items: center;
+  }
+
+  .footer-contact-links a {
+    font-size: 0.85rem;
+  }
+
+  .footer-contact-links a + a::before {
+    content: " | ";
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0.35rem 0 0.15rem;
+  }
+
+  .footer-contact-links .secondary-phone {
+    display: none;
+  }
+
+  .footer-hours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem 0.75rem;
+  }
+
+  .footer-contact-row {
+    margin-top: 0.35rem;
+    padding-top: 0.35rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .footer-brand p,
+  .footer-contact p,
+  .footer-hours {
+    font-size: 0.9rem;
+  }
+
+  .footer-badges {
+    gap: 0.35rem;
+  }
+
+  .footer-badges span {
+    font-size: 0.75rem;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-socials {
+    grid-template-columns: repeat(3, auto);
+    justify-content: flex-start;
+    gap: 0.6rem;
+  }
+
+  .social-link {
+    padding: 0.45rem;
+    border-radius: 999px;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+  }
+
+  .social-text {
+    display: none;
+  }
+}

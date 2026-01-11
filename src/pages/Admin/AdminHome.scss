@@ -1,18 +1,70 @@
+@import '../../styles/global.scss';
+
+.admin-home {
+  padding: 20px;
+
+  h2 {
+    margin-bottom: 0.4rem;
+  }
+}
+
+.admin-subtitle {
+  color: $text-secondary;
+  margin-bottom: 1.5rem;
+}
+
+.admin-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
 .admin-card {
-  background: #ffffff;
-  padding: 25px;
-  border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  background: $surface-color;
+  padding: 1.5rem;
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
   text-align: center;
+  border: 1px solid $border-light;
+
+  h3 {
+    margin: 0;
+    font-size: 1.8rem;
+    color: $primary-color;
+  }
+
+  p {
+    margin-top: 0.4rem;
+    color: $text-secondary;
+  }
 }
 
-.admin-card h3 {
-  margin: 0;
-  font-size: 28px;
-  color: #333;
+.admin-table {
+  overflow-x: auto;
+  background: $surface-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow-light;
+  border: 1px solid $border-light;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 0.9rem;
+    text-align: left;
+    border-bottom: 1px solid $border-light;
+  }
+
+  th {
+    background: $background-color;
+    color: $text-primary;
+  }
 }
 
-.admin-card p {
-  margin: 5px 0 0;
-  color: #777;
+.admin-empty {
+  color: $text-secondary;
 }

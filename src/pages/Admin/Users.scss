@@ -1,3 +1,5 @@
+@import '../../styles/global.scss';
+
 .users-container {
   padding: 24px;
 
@@ -7,101 +9,261 @@
     font-weight: 600;
   }
 
-  /* Create User Form */
+  .users-toggle {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+
+    button {
+      padding: 8px 16px;
+      border-radius: $border-radius;
+      border: 1px solid $border-color;
+      background: $background-color;
+      cursor: pointer;
+    }
+
+    button.active {
+      background: $primary-color;
+      color: $text-inverse;
+      border-color: $primary-color;
+    }
+  }
+
   .create-user-form {
     display: flex;
     flex-direction: column;
     gap: 12px;
     width: 100%;
     padding: 20px;
-    border: 1px solid #e3e3e3;
-    border-radius: 8px;
-    margin-bottom: 4
-    0px;
-    background: #fafafa;
+    border: 1px solid $border-light;
+    border-radius: $border-radius;
+    margin-bottom: 40px;
+    background: $surface-color;
 
     input,
     select {
       padding: 12px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
       font-size: 15px;
+      background: $background-color;
     }
 
     button {
       padding: 12px;
       font-size: 15px;
-      background: #4caf50;
-      color: white;
+      background: $success-color;
+      color: $text-inverse;
       border: none;
-      border-radius: 6px;
+      border-radius: $border-radius;
       cursor: pointer;
       transition: background 0.2s ease;
 
       &:hover {
-        background: #3c8e42;
+        background: darken($success-color, 10%);
       }
     }
   }
 
-  /* Users Table */
+  .users-actions {
+    margin-bottom: 20px;
+  }
+
+  .primary-button {
+    background: $primary-color;
+    color: $text-inverse;
+    border: none;
+    padding: 10px 16px;
+    border-radius: $border-radius;
+  }
+
+  .primary-button:hover {
+    background: $primary-dark;
+  }
+
   .users-table {
     width: 100%;
     border-collapse: collapse;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.06);
+    box-shadow: $shadow-light;
+    background: $surface-color;
+    border-radius: $border-radius;
+    overflow: hidden;
 
     th,
     td {
-      border: 1px solid #ddd;
+      border: 1px solid $border-light;
       padding: 12px 10px;
       font-size: 15px;
     }
 
     th {
-      background: #f4f4f4;
+      background: $background-color;
       font-weight: 600;
     }
 
     tr:nth-child(even) {
-      background: #fbfbfb;
+      background: $background-color;
     }
 
-    /* Status dropdown */
     select {
       padding: 8px;
-      border-radius: 4px;
-      border: 1px solid #bbb;
+      border-radius: $border-radius;
+      border: 1px solid $border-color;
       font-size: 14px;
+      background: $background-color;
     }
 
-    /* Delete Button */
     .delete {
-      background: #e53935;
-      color: white;
+      background: $error-color;
+      color: $text-inverse;
       padding: 7px 14px;
       border: none;
-      border-radius: 4px;
+      border-radius: $border-radius;
       cursor: pointer;
       transition: background 0.2s ease;
 
       &:hover {
-        background: #c62828;
+        background: darken($error-color, 10%);
       }
     }
 
-    /* Update Role Button */
     .update-role {
-      background: #1976d2;
-      color: white;
+      background: $primary-color;
+      color: $text-inverse;
       padding: 7px 14px;
       border: none;
-      border-radius: 4px;
+      border-radius: $border-radius;
       cursor: pointer;
       transition: background 0.2s ease;
 
       &:hover {
-        background: #115a9c;
+        background: $primary-dark;
       }
     }
+
+    .muted {
+      color: $text-secondary;
+      font-size: 0.9rem;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .users-table {
+      display: block;
+      overflow-x: auto;
+    }
+  }
+}
+
+.error {
+  color: $error-color;
+  margin-bottom: 1rem;
+}
+
+.muted {
+  color: $text-secondary;
+  font-size: 0.9rem;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(12, 18, 28, 0.55);
+  backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  z-index: $z-modal;
+}
+
+.modal {
+  background: $surface-color;
+  width: min(640px, 96vw);
+  border-radius: 16px;
+  box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  display: flex;
+  flex-direction: column;
+  max-height: 90vh;
+  overflow: hidden;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+}
+
+.modal-close {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  color: $text-secondary;
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+}
+
+.modal-close:hover {
+  background: rgba(148, 163, 184, 0.2);
+}
+
+.modal-body {
+  padding: 20px 24px 24px;
+  display: grid;
+  gap: 16px;
+  overflow-y: auto;
+}
+
+.modal-body label {
+  display: grid;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.modal-body input,
+.modal-body select,
+.modal-body textarea {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  background: $background-color;
+}
+
+.modal-body button {
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: none;
+  background: $primary-color;
+  color: $text-inverse;
+  font-weight: 600;
+}
+
+.modal-body button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.modal-body .ghost-button {
+  background: transparent;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  color: $text-primary;
+}
+
+@media (max-width: 768px) {
+  .modal-overlay {
+    padding: 12px;
+  }
+
+  .modal {
+    width: 100%;
+    max-height: 92vh;
+    border-radius: 14px;
   }
 }

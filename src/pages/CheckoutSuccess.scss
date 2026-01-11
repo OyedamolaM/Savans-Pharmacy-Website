@@ -1,0 +1,84 @@
+@import '../styles/global.scss';
+
+.checkout-success {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(140deg, rgba(78, 7, 129, 0.1), rgba(233, 9, 121, 0.08));
+}
+
+.success-card {
+  width: min(520px, 100%);
+  background: $surface-color;
+  border-radius: $border-radius;
+  padding: 2.5rem;
+  text-align: center;
+  box-shadow: $shadow-medium;
+  border: 1px solid $border-light;
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    color: $text-secondary;
+  }
+}
+
+.success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: $success-color;
+  color: $text-inverse;
+  font-size: 1.6rem;
+  margin: 0 auto 1rem;
+}
+
+.success-meta {
+  margin-top: 0.6rem;
+  color: $text-primary;
+}
+
+.success-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.primary-btn,
+.ghost-btn {
+  border: none;
+  border-radius: $border-radius;
+  padding: 0.7rem 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  transition: 0.2s ease;
+}
+
+.primary-btn {
+  background: $accent-color;
+  color: $text-inverse;
+
+  &:hover {
+    background: $accent-dark;
+  }
+}
+
+.ghost-btn {
+  background: transparent;
+  border: 1px solid $border-color;
+  color: $text-primary;
+
+  &:hover {
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+}

@@ -7,12 +7,13 @@ import Wishlist from "./Wishlist";
 import Profile from "./Profile";
 import Shipping from "./Shipping";
 import DashboardLayout from "./DashboardLayout";
+import Overview from "./Overview";
 
 const Dashboard = () => {
   return (
     <Routes>
       <Route element={<DashboardLayout />}>
-        <Route index element={<h2>Welcome to your Savans Account</h2>} />
+        <Route index element={<Overview />} />
         <Route path="orders" element={<Orders />} />
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<Profile />} />

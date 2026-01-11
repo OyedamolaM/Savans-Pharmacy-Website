@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import "./Account.scss";
 
 const Profile = () => {
   const [profile, setProfile] = useState({ name: "", email: "" });
@@ -51,14 +52,15 @@ const Profile = () => {
     }
   };
 
-  if (loading) return <p>Loading profile...</p>;
-  if (error) return <p>{error}</p>;
+  if (loading) return <p className="account-muted">Loading profile...</p>;
+  if (error) return <p className="account-muted">{error}</p>;
 
   return (
-    <div style={{ maxWidth: "400px", margin: "0 auto" }}>
+    <div className="account-section">
       <h2>Profile</h2>
-      {success && <p style={{ color: "green" }}>{success}</p>}
-      <form onSubmit={handleUpdateProfile} style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+      {success && <p className="account-muted">{success}</p>}
+      <div className="account-card">
+        <form onSubmit={handleUpdateProfile} className="account-form">
         <input
           placeholder="Name"
           value={profile.name}
@@ -78,8 +80,9 @@ const Profile = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Update Profile</button>
-      </form>
+          <button type="submit" className="account-btn">Update Profile</button>
+        </form>
+      </div>
     </div>
   );
 };

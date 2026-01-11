@@ -1,24 +1,198 @@
+@import '../../styles/global.scss';
+
 .orders-container {
   padding: 20px;
 
   h2 {
     margin-bottom: 20px;
-    color: #333;
+    color: $text-primary;
+  }
+
+  .orders-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .orders-actions {
+    margin-bottom: 20px;
+  }
+
+  .primary-button {
+    background: $primary-color;
+    color: $text-inverse;
+    border: none;
+    padding: 10px 16px;
+    border-radius: $border-radius;
+  }
+
+  .primary-button:hover {
+    background: $primary-dark;
+  }
+
+  .orders-loading {
+    color: $text-secondary;
+    font-size: 0.9rem;
+  }
+
+  .orders-error {
+    color: $error-color;
+    margin-bottom: 16px;
+  }
+
+  .muted {
+    color: $text-secondary;
+    font-size: 0.9rem;
+  }
+
+  .create-order-form {
+    background: $surface-color;
+    border-radius: $border-radius;
+    border: 1px solid $border-light;
+    padding: 20px;
+    margin-bottom: 30px;
+    box-shadow: $shadow-light;
+    display: grid;
+    gap: 20px;
+  }
+
+  .order-section {
+    display: grid;
+    gap: 12px;
+  }
+
+  .order-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .order-helper {
+    color: $text-secondary;
+    font-size: 0.95rem;
+  }
+
+  .ghost-button {
+    background: transparent;
+    border: 1px solid $border-color;
+    padding: 6px 12px;
+    border-radius: $border-radius;
+    color: $text-primary;
+  }
+
+  .ghost-button:hover {
+    border-color: $primary-color;
+    color: $primary-color;
+  }
+
+  .link-button {
+    background: transparent;
+    border: none;
+    color: $accent-color;
+    padding: 0;
+  }
+
+  .products-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .product-line {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: $border-radius;
+    border: 1px solid $border-light;
+    background: $background-color;
+  }
+
+  .product-title {
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .product-meta {
+    color: $text-secondary;
+    font-size: 0.9rem;
+  }
+
+  .product-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .qty-stepper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .qty-button {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid $border-color;
+    background: $background-color;
+    cursor: pointer;
+  }
+
+  .qty-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .qty-value {
+    min-width: 24px;
+    text-align: center;
+    font-weight: 600;
+  }
+
+  .saved-addresses {
+    display: grid;
+    gap: 8px;
+  }
+
+  .saved-address-list {
+    display: grid;
+    gap: 8px;
+  }
+
+  .saved-address {
+    text-align: left;
+    padding: 10px 12px;
+    border-radius: $border-radius;
+    border: 1px solid $border-light;
+    background: $background-color;
+    color: $text-primary;
+  }
+
+  .saved-address.active {
+    border-color: $primary-color;
+    box-shadow: 0 0 0 1px $primary-color;
   }
 
   .orders-table {
     width: 100%;
     border-collapse: collapse;
+    background: $surface-color;
+    border-radius: $border-radius;
+    overflow: hidden;
+    box-shadow: $shadow-light;
 
-    th, td {
+    th,
+    td {
       padding: 10px;
       text-align: left;
-      border-bottom: 1px solid #ccc;
+      border-bottom: 1px solid $border-light;
     }
 
     th {
-      background: #f5f5f5;
-      color: #333;
+      background: $background-color;
+      color: $text-primary;
     }
 
     td div {
@@ -26,20 +200,195 @@
     }
 
     select {
-      padding: 5px;
-      border-radius: 4px;
-      border: 1px solid #ccc;
-      background: #fff;
+      padding: 6px;
+      border-radius: $border-radius;
+      border: 1px solid $border-color;
+      background: $background-color;
       cursor: pointer;
 
       &:focus {
         outline: none;
-        border-color: #007bff;
+        border-color: $primary-color;
       }
     }
   }
 
+  .order-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .order-actions select {
+    min-width: 140px;
+  }
+
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(12, 18, 28, 0.55);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    z-index: $z-modal;
+  }
+
+  .modal {
+    background: $surface-color;
+    width: min(760px, 96vw);
+    border-radius: 16px;
+    box-shadow: 0 24px 80px rgba(15, 23, 42, 0.28);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow: hidden;
+  }
+
+  .modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 24px;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+  }
+
+  .modal-close {
+    background: transparent;
+    border: none;
+    font-size: 1.2rem;
+    color: $text-secondary;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: grid;
+    place-items: center;
+  }
+
+  .modal-close:hover {
+    background: rgba(148, 163, 184, 0.2);
+  }
+
+  .modal-body {
+    padding: 20px 24px 24px;
+    display: grid;
+    gap: 18px;
+    overflow-y: auto;
+  }
+
+  .modal-body label {
+    display: grid;
+    gap: 6px;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+
+  .modal-body input,
+  .modal-body select,
+  .modal-body textarea {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    background: $background-color;
+  }
+
+  .modal-body button {
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: none;
+    background: $primary-color;
+    color: $text-inverse;
+    font-weight: 600;
+  }
+
+  .modal-body button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+  }
+
+  .modal-body .ghost-button {
+    background: transparent;
+    border: 1px solid rgba(148, 163, 184, 0.3);
+    color: $text-primary;
+  }
+
+  .modal-body .link-button {
+    background: transparent;
+    border: none;
+    color: $accent-color;
+    padding: 0;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+  }
+
+  .product-select-list {
+    display: grid;
+    gap: 12px;
+  }
+
+  .product-option {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px;
+    border-radius: $border-radius;
+    border: 1px solid $border-light;
+    background: $surface-color;
+  }
+
+  .product-option button {
+    padding: 6px 12px;
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .form-grid .full-width {
+    grid-column: 1 / -1;
+  }
+
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+
   @media (max-width: 768px) {
+    .modal-overlay {
+      padding: 12px;
+    }
+
+    .modal {
+      width: 100%;
+      max-height: 92vh;
+      border-radius: 14px;
+    }
+
+    .order-section-header {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .product-line {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
     .orders-table {
       display: block;
       overflow-x: auto;

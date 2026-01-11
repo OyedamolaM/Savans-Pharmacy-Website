@@ -1,0 +1,138 @@
+@import '../../styles/global.scss';
+
+.account-section {
+  max-width: 900px;
+  margin: 0 auto;
+
+  h2 {
+    margin-bottom: 1rem;
+  }
+}
+
+.account-card {
+  background: $surface-color;
+  border-radius: $border-radius;
+  padding: 1.2rem;
+  box-shadow: $shadow-light;
+  border: 1px solid $border-light;
+}
+
+.account-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.account-form {
+  display: grid;
+  gap: 0.8rem;
+
+  input,
+  select {
+    padding: 0.7rem 0.9rem;
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    background: $background-color;
+  }
+}
+
+.account-btn {
+  background: $primary-color;
+  color: $text-inverse;
+  border: none;
+  border-radius: $border-radius;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  &:hover {
+    background: $primary-dark;
+  }
+}
+
+.account-muted {
+  color: $text-secondary;
+}
+
+.order-card {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.order-summary {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: $text-secondary;
+}
+
+.order-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
+  color: $text-secondary;
+}
+
+.order-id {
+  font-size: 0.85rem;
+}
+
+.order-products {
+  margin-top: 0.5rem;
+}
+
+.order-product {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 0.6rem;
+  align-items: center;
+  padding: 0.4rem 0;
+  border-bottom: 1px dashed $border-color;
+}
+
+.order-product-info {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+
+  img {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    object-fit: cover;
+    background: $background-color;
+    border: 1px solid $border-light;
+  }
+}
+
+@media (max-width: 600px) {
+  .order-product {
+    grid-template-columns: 1fr;
+  }
+
+  .order-product-info {
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+}
+
+.wishlist-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.wishlist-item {
+  padding: 1rem;
+  border-radius: $border-radius;
+  background: $surface-color;
+  border: 1px solid $border-light;
+  box-shadow: $shadow-light;
+}

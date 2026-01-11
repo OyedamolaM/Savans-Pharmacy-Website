@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "./AdminHome.scss"
+import "./AdminHome.scss";
 
 const AdminHome = () => {
+  const adminName = localStorage.getItem("name");
+  const toTitleCase = (value = "") =>
+    value
+      .toString()
+      .trim()
+      .toLowerCase()
+      .replace(/\b\w/g, (char) => char.toUpperCase());
   const [stats, setStats] = useState({
     totalUsers: 0,
     totalProducts: 0,
@@ -32,24 +39,18 @@ const AdminHome = () => {
   }, [axiosConfig]);
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div className="admin-home">
       <h2>Admin Overview</h2>
-      <p style={{ marginBottom: "20px", color: "#666" }}>
-        Welcome to your admin analytics dashboard.
+      <p className="admin-subtitle">
+        {adminName
+          ? `Welcome back, ${toTitleCase(adminName)}.`
+          : "Welcome to your admin analytics dashboard."}
       </p>
 
-      {/* Analytics Cards */}
-      <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "20px",
-          marginBottom: "40px",
-        }}
-      >
+      <div className="admin-stats">
         <div className="admin-card">
           <h3>{stats.totalUsers}</h3>
-          <p>Total Users</p>
+          <p>Total Customers</p>
         </div>
 
         <div className="admin-card">
@@ -68,39 +69,35 @@ const AdminHome = () => {
         </div>
       </div>
 
-      {/* Recent Orders */}
       <h3>Recent Orders</h3>
 
       {stats.recentOrders.length === 0 ? (
-        <p>No recent orders.</p>
+        <p className="admin-empty">No recent orders.</p>
       ) : (
-        <table
-          style={{
-            width: "100%",
-            marginTop: "10px",
-            borderCollapse: "collapse",
-            background: "#fff",
-          }}
-        >
-          <thead>
-            <tr style={{ background: "#eee" }}>
-              <th style={{ padding: "10px" }}>Order ID</th>
-              <th style={{ padding: "10px" }}>User</th>
-              <th style={{ padding: "10px" }}>Amount</th>
-              <th style={{ padding: "10px" }}>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {stats.recentOrders.map((order) => (
-              <tr key={order._id}>
-                <td style={{ padding: "10px" }}>{order._id}</td>
-                <td style={{ padding: "10px" }}>{order.user?.name}</td>
-                <td style={{ padding: "10px" }}>₦{order.totalPrice}</td>
-                <td style={{ padding: "10px" }}>{order.status}</td>
+        <div className="admin-table">
+          <table>
+            <thead>
+              <tr>
+                <th>Order ID</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Amount</th>
+                <th>Status</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {stats.recentOrders.map((order) => (
+                <tr key={order._id}>
+                  <td>{order._id}</td>
+                  <td>{order.user?.name ? toTitleCase(order.user.name) : "-"}</td>
+                  <td>{order.user?.phone || "-"}</td>
+                  <td>₦{order.totalPrice}</td>
+                  <td>{order.orderStatus}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       )}
     </div>
   );
