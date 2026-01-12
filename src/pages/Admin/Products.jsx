@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Products.scss";
 
 const AdminProducts = () => {
@@ -44,12 +45,12 @@ const AdminProducts = () => {
 
   const token = localStorage.getItem("token");
   const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
-  const API_URL = "http://localhost:5000/api/admin/products";
+  const API_URL = `${API_BASE_URL}/api/admin/products`;
 
   // Fetch products
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/products");
+      const { data } = await axios.get(`${API_BASE_URL}/api/products`);
       setProducts(data);
     } catch (err) {
       console.error(err);
@@ -66,7 +67,7 @@ const AdminProducts = () => {
   useEffect(() => {
     const fetchTaxRates = async () => {
       try {
-        const { data } = await axios.get("http://localhost:5000/api/tax-rates", axiosConfig);
+        const { data } = await axios.get(`${API_BASE_URL}/api/tax-rates`, axiosConfig);
         setTaxRates(data || []);
       } catch (err) {
         console.error(err);

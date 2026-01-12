@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Suppliers.scss";
 
 const Suppliers = () => {
@@ -55,7 +56,7 @@ const Suppliers = () => {
 
   const fetchSuppliers = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/suppliers", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/suppliers`, axiosConfig);
       setSuppliers(data || []);
     } catch (err) {
       console.error(err);
@@ -68,7 +69,7 @@ const Suppliers = () => {
   const fetchBranches = async () => {
     if (!canSelectBranch) return;
     try {
-      const { data } = await axios.get("http://localhost:5000/api/branches", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/branches`, axiosConfig);
       setBranches(data || []);
     } catch (err) {
       console.error(err);
@@ -112,7 +113,7 @@ const Suppliers = () => {
   const handleDelete = async (supplierId) => {
     if (!window.confirm("Delete this supplier?")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/suppliers/${supplierId}`, axiosConfig);
+      await axios.delete(`${API_BASE_URL}/api/suppliers/${supplierId}`, axiosConfig);
       setSuppliers((prev) => prev.filter((supplier) => supplier._id !== supplierId));
     } catch (err) {
       console.error(err);
@@ -134,14 +135,14 @@ const Suppliers = () => {
 
       if (editingSupplier) {
         const { data } = await axios.put(
-          `http://localhost:5000/api/suppliers/${editingSupplier._id}`,
+          `${API_BASE_URL}/api/suppliers/${editingSupplier._id}`,
           payload,
           axiosConfig
         );
         setSuppliers((prev) => prev.map((item) => (item._id === data._id ? data : item)));
       } else {
         const { data } = await axios.post(
-          "http://localhost:5000/api/suppliers",
+          `${API_BASE_URL}/api/suppliers`,
           payload,
           axiosConfig
         );

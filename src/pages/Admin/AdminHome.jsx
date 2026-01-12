@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./AdminHome.scss";
 
 const AdminHome = () => {
@@ -26,7 +27,7 @@ const AdminHome = () => {
     const fetchAdminStats = async () => {
       try {
         const { data } = await axios.get(
-          "http://localhost:5000/api/admin/analytics",
+          `${API_BASE_URL}/api/admin/analytics`,
           axiosConfig
         );
         setStats(data);

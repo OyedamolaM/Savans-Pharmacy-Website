@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Account.scss";
 
 const Shipping = () => {
@@ -27,7 +28,7 @@ const Shipping = () => {
   const fetchAddresses = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/user/profile",
+        `${API_BASE_URL}/api/user/profile`,
         axiosConfig
       );
       setAddresses(data.shippingAddresses || []);
@@ -48,7 +49,7 @@ const Shipping = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/user/shipping",
+        `${API_BASE_URL}/api/user/shipping`,
         newAddress,
         axiosConfig
       );
@@ -74,7 +75,7 @@ const Shipping = () => {
   const handleRemoveAddress = async (id) => {
     try {
       const { data } = await axios.delete(
-        `http://localhost:5000/api/user/shipping/${id}`,
+        `${API_BASE_URL}/api/user/shipping/${id}`,
         axiosConfig
       );
       setAddresses(data);

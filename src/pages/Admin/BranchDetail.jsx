@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Branches.scss";
 
 const BranchDetail = () => {
@@ -48,11 +49,11 @@ const BranchDetail = () => {
     if (!branchId) return;
     try {
       const [branchRes, ordersRes, staffRes, customersRes, inventoryRes] = await Promise.all([
-        axios.get(`http://localhost:5000/api/branches/${branchId}`, axiosConfig),
-        axios.get(`http://localhost:5000/api/branches/${branchId}/orders`, axiosConfig),
-        axios.get(`http://localhost:5000/api/branches/${branchId}/staff`, axiosConfig),
-        axios.get(`http://localhost:5000/api/branches/${branchId}/customers`, axiosConfig),
-        axios.get(`http://localhost:5000/api/branches/${branchId}/inventory`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/branches/${branchId}`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/branches/${branchId}/orders`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/branches/${branchId}/staff`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/branches/${branchId}/customers`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/branches/${branchId}/inventory`, axiosConfig),
       ]);
       setBranchDetails(branchRes.data);
       setOrders(ordersRes.data || []);
@@ -70,7 +71,7 @@ const BranchDetail = () => {
 
   const fetchProducts = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/products");
+      const { data } = await axios.get(`${API_BASE_URL}/api/products`);
       setProducts(data || []);
     } catch (err) {
       console.error(err);
@@ -107,7 +108,7 @@ const BranchDetail = () => {
         reason: inventoryReason || "manual_adjustment",
       };
       const response = await axios.put(
-        `http://localhost:5000/api/branches/${branchId}/inventory`,
+        `${API_BASE_URL}/api/branches/${branchId}/inventory`,
         payload,
         axiosConfig
       );
@@ -128,7 +129,7 @@ const BranchDetail = () => {
     if (!branchId) return;
     try {
       const { data } = await axios.put(
-        `http://localhost:5000/api/branches/${branchId}`,
+        `${API_BASE_URL}/api/branches/${branchId}`,
         editBranch,
         axiosConfig
       );
@@ -145,7 +146,7 @@ const BranchDetail = () => {
     if (!branchId || !canDeleteBranch) return;
     if (!window.confirm("Delete this branch? This cannot be undone.")) return;
     try {
-      await axios.delete(`http://localhost:5000/api/branches/${branchId}`, axiosConfig);
+      await axios.delete(`${API_BASE_URL}/api/branches/${branchId}`, axiosConfig);
       navigate(`${basePath}/branches`);
     } catch (err) {
       console.error(err);

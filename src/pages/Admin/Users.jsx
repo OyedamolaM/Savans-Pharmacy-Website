@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Users.scss";
 import React from "react";
 const Users = ({ defaultView = "customers", showToggle = true }) => {
@@ -42,7 +43,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
 
   const token = localStorage.getItem("token");
   const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
-  const API_URL = "http://localhost:5000/api/admin/users";
+  const API_URL = `${API_BASE_URL}/api/admin/users`;
 
   const fetchUsers = async () => {
     try {
@@ -59,7 +60,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
 
   const fetchBranches = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/branches", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/branches`, axiosConfig);
       setBranches(data || []);
     } catch (err) {
       console.error(err);
@@ -68,7 +69,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
 
   const fetchProfile = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/user/profile", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/user/profile`, axiosConfig);
       setCurrentBranch(data.branch || null);
       if (data.branch) {
         setNewUser((prev) => ({ ...prev, branchId: data.branch._id }));

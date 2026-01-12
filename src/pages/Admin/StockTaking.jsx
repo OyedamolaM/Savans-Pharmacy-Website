@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Inventory.scss";
 
 const StockTaking = () => {
@@ -21,7 +22,7 @@ const StockTaking = () => {
 
   const fetchProfile = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/user/profile", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/user/profile`, axiosConfig);
       setCurrentBranch(data.branch || null);
       if (data.branch?._id) {
         setSelectedBranchId(data.branch._id);
@@ -33,7 +34,7 @@ const StockTaking = () => {
 
   const fetchBranches = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/branches", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/branches`, axiosConfig);
       setBranches(data || []);
       if (!selectedBranchId && data?.length) {
         setSelectedBranchId(data[0]._id);
@@ -47,7 +48,7 @@ const StockTaking = () => {
     if (!branchId) return;
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/branches/${branchId}/inventory`,
+        `${API_BASE_URL}/api/branches/${branchId}/inventory`,
         axiosConfig
       );
       setInventory(data || []);
@@ -113,7 +114,7 @@ const StockTaking = () => {
         quantity: Number(counts[item.product?._id]) || 0,
       }));
       const response = await axios.put(
-        `http://localhost:5000/api/branches/${selectedBranchId}/inventory`,
+        `${API_BASE_URL}/api/branches/${selectedBranchId}/inventory`,
         { items, reason },
         axiosConfig
       );

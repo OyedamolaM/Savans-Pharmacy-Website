@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./SupplierInvoices.scss";
 
 const SupplierInvoices = ({ defaultCreateOpen = false }) => {
@@ -54,9 +55,9 @@ const SupplierInvoices = ({ defaultCreateOpen = false }) => {
   const fetchData = async () => {
     try {
       const [invoiceRes, supplierRes, productRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/supplier-invoices", axiosConfig),
-        axios.get("http://localhost:5000/api/suppliers", axiosConfig),
-        axios.get("http://localhost:5000/api/products"),
+        axios.get(`${API_BASE_URL}/api/supplier-invoices`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/suppliers`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/products`),
       ]);
       setInvoices(invoiceRes.data || []);
       setSuppliers(supplierRes.data || []);
@@ -72,7 +73,7 @@ const SupplierInvoices = ({ defaultCreateOpen = false }) => {
   const fetchBranches = async () => {
     if (!canSelectBranch) return;
     try {
-      const { data } = await axios.get("http://localhost:5000/api/branches", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/branches`, axiosConfig);
       setBranches(data || []);
       if (!invoiceForm.branchId && data?.length) {
         setInvoiceForm((prev) => ({ ...prev, branchId: data[0]._id }));
@@ -84,7 +85,7 @@ const SupplierInvoices = ({ defaultCreateOpen = false }) => {
 
   const fetchProfile = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/user/profile", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/user/profile`, axiosConfig);
       setCurrentBranch(data.branch || null);
     } catch (err) {
       console.error(err);
@@ -206,7 +207,7 @@ const SupplierInvoices = ({ defaultCreateOpen = false }) => {
       });
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/supplier-invoices",
+        `${API_BASE_URL}/api/supplier-invoices`,
         formData,
         { headers: { ...axiosConfig.headers, "Content-Type": "multipart/form-data" } }
       );
@@ -241,7 +242,7 @@ const SupplierInvoices = ({ defaultCreateOpen = false }) => {
     if (!activeInvoice) return;
     try {
       const { data } = await axios.post(
-        `http://localhost:5000/api/supplier-invoices/${activeInvoice._id}/payments`,
+        `${API_BASE_URL}/api/supplier-invoices/${activeInvoice._id}/payments`,
         paymentForm,
         axiosConfig
       );

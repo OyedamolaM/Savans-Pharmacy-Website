@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./ActivityLog.scss";
 
 const ActivityLog = () => {
@@ -17,7 +18,7 @@ const ActivityLog = () => {
   const fetchBranches = async () => {
     if (!canSelectBranch) return;
     try {
-      const { data } = await axios.get("http://localhost:5000/api/branches", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/branches`, axiosConfig);
       setBranches(data || []);
       if (data?.length) {
         setSelectedBranch(data[0]._id);
@@ -31,7 +32,7 @@ const ActivityLog = () => {
     try {
       const query = branchId ? `?branchId=${branchId}` : "";
       const { data } = await axios.get(
-        `http://localhost:5000/api/activity${query}`,
+        `${API_BASE_URL}/api/activity${query}`,
         axiosConfig
       );
       setLogs(data || []);

@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../api/baseUrl";
 import { Link, useLocation } from "react-router-dom";
 import "./CheckoutSuccess.scss";
 
@@ -35,7 +36,7 @@ const CheckoutSuccess = () => {
               onClick={() => {
                 const token = localStorage.getItem("token");
                 axios
-                  .get(`http://localhost:5000/api/orders/${orderId}/receipt`, {
+                  .get(`${API_BASE_URL}/api/orders/${orderId}/receipt`, {
                     headers: { Authorization: `Bearer ${token}` },
                     responseType: "blob",
                   })

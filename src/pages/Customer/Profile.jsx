@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Account.scss";
 
 const Profile = () => {
@@ -18,7 +19,7 @@ const Profile = () => {
   const fetchProfile = async () => {
     try {
       const { data } = await axios.get(
-        "http://localhost:5000/api/user/profile",
+        `${API_BASE_URL}/api/user/profile`,
         axiosConfig
       );
       setProfile({ name: data.name, email: data.email });
@@ -39,7 +40,7 @@ const Profile = () => {
     e.preventDefault();
     try {
       const { data } = await axios.put(
-        "http://localhost:5000/api/user/update",
+        `${API_BASE_URL}/api/user/update`,
         { name: profile.name, email: profile.email, password },
         axiosConfig
       );

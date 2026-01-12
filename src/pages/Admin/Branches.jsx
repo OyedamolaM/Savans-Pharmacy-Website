@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Branches.scss";
 
 const Branches = () => {
@@ -32,7 +33,7 @@ const Branches = () => {
 
   const fetchBranches = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/branches", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/branches`, axiosConfig);
       setBranches(data || []);
       if (!data || data.length === 0) {
         setNewBranch({
@@ -60,7 +61,7 @@ const Branches = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/branches",
+        `${API_BASE_URL}/api/branches`,
         newBranch,
         axiosConfig
       );

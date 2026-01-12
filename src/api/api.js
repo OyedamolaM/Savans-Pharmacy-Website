@@ -1,7 +1,8 @@
 // src/api/api.js
 import axios from 'axios';
+import { API_BASE_URL } from "./baseUrl";
 
-const API_URL = 'http://localhost:5000/api'; // replace with deployed URL later
+const API_URL = `${API_BASE_URL}/api`;
 
 const authHeaders = () => {
   const token = localStorage.getItem("token");

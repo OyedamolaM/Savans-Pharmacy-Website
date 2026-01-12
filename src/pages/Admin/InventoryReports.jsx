@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Inventory.scss";
 
 const InventoryReports = () => {
@@ -24,13 +25,13 @@ const InventoryReports = () => {
     try {
       const [dailyRes, taxRes, returnsRes, supplierRes, movementRes] = await Promise.all([
         axios.get(
-          `http://localhost:5000/api/reports/sales-summary?from=${from}&to=${to}&group=${groupBy}`,
+          `${API_BASE_URL}/api/reports/sales-summary?from=${from}&to=${to}&group=${groupBy}`,
           axiosConfig
         ),
-        axios.get(`http://localhost:5000/api/reports/tax-summary?from=${from}&to=${to}`, axiosConfig),
-        axios.get("http://localhost:5000/api/reports/returns", axiosConfig),
-        axios.get("http://localhost:5000/api/reports/supplier-balances", axiosConfig),
-        axios.get(`http://localhost:5000/api/reports/inventory-movement?from=${from}&to=${to}`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/reports/tax-summary?from=${from}&to=${to}`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/reports/returns`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/reports/supplier-balances`, axiosConfig),
+        axios.get(`${API_BASE_URL}/api/reports/inventory-movement?from=${from}&to=${to}`, axiosConfig),
       ]);
       setDailySales(dailyRes.data || []);
       setTaxSummary(taxRes.data || null);

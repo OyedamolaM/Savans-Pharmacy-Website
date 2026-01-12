@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Inventory.scss";
 
 const Approvals = () => {
@@ -14,7 +15,7 @@ const Approvals = () => {
 
   const fetchApprovals = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/approvals?status=pending", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/approvals?status=pending`, axiosConfig);
       setApprovals(data || []);
     } catch (err) {
       console.error(err);
@@ -32,7 +33,7 @@ const Approvals = () => {
 
   const handleAction = async (id, action) => {
     try {
-      await axios.post(`http://localhost:5000/api/approvals/${id}/${action}`, {}, axiosConfig);
+      await axios.post(`${API_BASE_URL}/api/approvals/${id}/${action}`, {}, axiosConfig);
       setApprovals((prev) => prev.filter((item) => item._id !== id));
     } catch (err) {
       console.error(err);

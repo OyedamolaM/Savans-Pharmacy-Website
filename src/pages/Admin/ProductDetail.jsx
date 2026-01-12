@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Inventory.scss";
 
 const ProductDetail = () => {
@@ -47,7 +48,7 @@ const ProductDetail = () => {
 
   const fetchProduct = async () => {
     try {
-    const { data } = await axios.get(`http://localhost:5000/api/products/${productId}`);
+    const { data } = await axios.get(`${API_BASE_URL}/api/products/${productId}`);
       setProduct(data);
       setForm({
         title: data.title || "",
@@ -80,7 +81,7 @@ const ProductDetail = () => {
 
   const fetchTaxRates = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/tax-rates", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/tax-rates`, axiosConfig);
       setTaxRates(data || []);
     } catch (err) {
       console.error(err);
@@ -90,7 +91,7 @@ const ProductDetail = () => {
   const fetchHistory = async () => {
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/activity?entityType=product&entityId=${productId}`,
+        `${API_BASE_URL}/api/activity?entityType=product&entityId=${productId}`,
         axiosConfig
       );
       setHistory(data || []);
@@ -141,7 +142,7 @@ const ProductDetail = () => {
       }
 
       const { data } = await axios.put(
-        `http://localhost:5000/api/admin/products/${productId}`,
+        `${API_BASE_URL}/api/admin/products/${productId}`,
         formData,
         { headers: { ...axiosConfig.headers, "Content-Type": "multipart/form-data" } }
       );

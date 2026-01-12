@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Orders.scss";
 
 const Orders = () => {
@@ -80,7 +81,7 @@ const Orders = () => {
   const canManageInventory = ["super_admin", "admin", "inventory_manager"].includes(role);
   const canSelectBranch = ["super_admin", "admin"].includes(role);
   const axiosConfig = { headers: { Authorization: `Bearer ${token}` } };
-  const API_URL = "http://localhost:5000/api/admin/orders";
+  const API_URL = `${API_BASE_URL}/api/admin/orders`;
   const selectedBranch = canSelectBranch
     ? branches.find((branch) => branch._id === newOrder.branchId)
     : currentBranch;
@@ -138,8 +139,8 @@ const Orders = () => {
   const fetchMeta = async () => {
     try {
       const [productsRes, usersRes] = await Promise.all([
-        axios.get("http://localhost:5000/api/products"),
-        axios.get("http://localhost:5000/api/admin/users?type=customers", axiosConfig),
+        axios.get(`${API_BASE_URL}/api/products`),
+        axios.get(`${API_BASE_URL}/api/admin/users?type=customers`, axiosConfig),
       ]);
       setProductsCatalog(productsRes.data || []);
       setCustomers(
@@ -155,7 +156,7 @@ const Orders = () => {
 
   const fetchBranches = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/branches", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/branches`, axiosConfig);
       setBranches(data || []);
       if (canSelectBranch && !newOrder.branchId && data?.length) {
         setNewOrder((prev) => ({ ...prev, branchId: data[0]._id }));
@@ -168,7 +169,7 @@ const Orders = () => {
 
   const fetchProfile = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/user/profile", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/user/profile`, axiosConfig);
       if (data.branch) {
         setCurrentBranch(data.branch);
       }
@@ -184,7 +185,7 @@ const Orders = () => {
     }
     try {
       const { data } = await axios.get(
-        `http://localhost:5000/api/branches/${branchId}/inventory`,
+        `${API_BASE_URL}/api/branches/${branchId}/inventory`,
         axiosConfig
       );
       const nextMap = {};
@@ -430,7 +431,7 @@ const Orders = () => {
     setCreatingCustomer(true);
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/admin/users",
+        `${API_BASE_URL}/api/admin/users`,
         {
           ...customerForm,
           role: "user",
@@ -469,7 +470,7 @@ const Orders = () => {
       });
 
       const { data } = await axios.post(
-        "http://localhost:5000/api/admin/products",
+        `${API_BASE_URL}/api/admin/products`,
         formData,
         { headers: { ...axiosConfig.headers, "Content-Type": "multipart/form-data" } }
       );

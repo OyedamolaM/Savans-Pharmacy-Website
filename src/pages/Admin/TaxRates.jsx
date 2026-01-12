@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Inventory.scss";
 
 const TaxRates = () => {
@@ -20,7 +21,7 @@ const TaxRates = () => {
 
   const fetchRates = async () => {
     try {
-      const { data } = await axios.get("http://localhost:5000/api/tax-rates", axiosConfig);
+      const { data } = await axios.get(`${API_BASE_URL}/api/tax-rates`, axiosConfig);
       setRates(data || []);
     } catch (err) {
       console.error(err);
@@ -45,7 +46,7 @@ const TaxRates = () => {
     e.preventDefault();
     try {
       const { data } = await axios.post(
-        "http://localhost:5000/api/tax-rates",
+        `${API_BASE_URL}/api/tax-rates`,
         form,
         axiosConfig
       );

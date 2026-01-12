@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { API_BASE_URL } from "../../api/baseUrl";
 import "./Account.scss";
 
 const Orders = () => {
@@ -10,7 +11,7 @@ const Orders = () => {
     const fetchOrders = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:5000/api/orders/my-orders", {
+        const res = await axios.get(`${API_BASE_URL}/api/orders/my-orders`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -43,12 +44,12 @@ const Orders = () => {
           const resolveImage = (imageUrl) => {
             if (!imageUrl) return "/fallback.jpg";
             if (imageUrl.startsWith("http")) return imageUrl;
-            return `http://localhost:5000${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
+            return `${API_BASE_URL}${imageUrl.startsWith("/") ? "" : "/"}${imageUrl}`;
           };
           const handlePrint = () => {
             const token = localStorage.getItem("token");
             axios
-              .get(`http://localhost:5000/api/orders/${order._id}/receipt`, {
+              .get(`${API_BASE_URL}/api/orders/${order._id}/receipt`, {
                 headers: { Authorization: `Bearer ${token}` },
                 responseType: "blob",
               })
