@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import "./AdminDashboard.scss"
+import "./adminDashboard.scss"
 //chore
 
 const AdminDashboardLayout = () => {
