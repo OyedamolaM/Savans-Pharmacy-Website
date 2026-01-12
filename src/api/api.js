@@ -66,5 +66,10 @@ export const getProfile = () =>
     headers: authHeaders(),
   });
 
+export const addShippingAddress = (payload) =>
+  axios.post(`${API_URL}/user/shipping`, payload, {
+    headers: authHeaders(),
+  });
+
 
 // Add more endpoints as needed

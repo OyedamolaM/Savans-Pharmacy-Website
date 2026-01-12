@@ -81,6 +81,35 @@
   }
 }
 
+.checkout-address-card {
+  display: grid;
+  gap: 0.3rem;
+  padding: 0.8rem 1rem;
+  border-radius: $border-radius;
+  border: 1px solid $border-light;
+  background: $background-color;
+  color: $text-secondary;
+}
+
+.checkout-address-list {
+  display: grid;
+  gap: 0.5rem;
+}
+
+.checkout-radio {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  font-size: 0.95rem;
+  color: $text-secondary;
+}
+
+.checkout-address-btn {
+  align-self: flex-start;
+  border-color: $border-color;
+  color: $text-secondary;
+}
+
 .checkout-summary {
   h2 {
     margin-bottom: 1rem;
@@ -115,6 +144,70 @@
   justify-content: space-between;
   margin-top: 1rem;
   font-size: 1.1rem;
+}
+
+.checkout-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 2000;
+}
+
+.checkout-modal {
+  width: min(600px, 100%);
+  background: $surface-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow-medium;
+  border: 1px solid $border-light;
+  overflow: hidden;
+}
+
+.checkout-modal .outline-btn {
+  border: 1px solid $border-color;
+  color: $text-secondary;
+}
+
+.checkout-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid $border-light;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.checkout-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.checkout-modal-body {
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.checkout-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+}
+
+.checkout-toggle {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
+  color: $text-secondary;
 }
 
 .checkout-empty {

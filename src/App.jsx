@@ -24,7 +24,7 @@ const App = () => {
         <Route
           path="/cart"
           element={
-            <PrivateRoute role="user">
+            <PrivateRoute role="customer">
               <Cart />
             </PrivateRoute>
           }
@@ -32,7 +32,7 @@ const App = () => {
         <Route
           path="/checkout"
           element={
-            <PrivateRoute role="user">
+            <PrivateRoute role="customer">
               <Checkout />
             </PrivateRoute>
           }
@@ -40,7 +40,7 @@ const App = () => {
         <Route
           path="/checkout/success"
           element={
-            <PrivateRoute role="user">
+            <PrivateRoute role="customer">
               <CheckoutSuccess />
             </PrivateRoute>
           }
@@ -48,11 +48,11 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        {/* Customer Dashboard (user role) */}
+        {/* Customer Dashboard (customer role) */}
         <Route
           path="/dashboard/*"
           element={
-            <PrivateRoute role="user">
+            <PrivateRoute role="customer">
               <Dashboard />
             </PrivateRoute>
           }

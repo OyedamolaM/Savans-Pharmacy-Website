@@ -144,7 +144,7 @@ const Orders = () => {
       ]);
       setProductsCatalog(productsRes.data || []);
       setCustomers(
-        (usersRes.data || []).filter((user) => user.role === "user")
+        (usersRes.data || []).filter((user) => user.role === "customer")
       );
     } catch (err) {
       console.error(err);
@@ -434,7 +434,7 @@ const Orders = () => {
         `${API_BASE_URL}/api/admin/users`,
         {
           ...customerForm,
-          role: "user",
+          role: "customer",
         },
         axiosConfig
       );

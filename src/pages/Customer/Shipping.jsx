@@ -8,6 +8,8 @@ const Shipping = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(null);
+  const [showModal, setShowModal] = useState(false);
+  const [makeDefault, setMakeDefault] = useState(true);
   const [newAddress, setNewAddress] = useState({
     fullName: "",
     addressLine1: "",
@@ -50,7 +52,7 @@ const Shipping = () => {
     try {
       const { data } = await axios.post(
         `${API_BASE_URL}/api/user/shipping`,
-        newAddress,
+        { ...newAddress, saveAsNew: true, makeDefault },
         axiosConfig
       );
       setAddresses(data);
@@ -64,6 +66,8 @@ const Shipping = () => {
         postalCode: "",
         phone: "",
       });
+      setMakeDefault(true);
+      setShowModal(false);
       setSuccess("Shipping address added!");
     } catch (err) {
       console.error(err);
@@ -93,6 +97,16 @@ const Shipping = () => {
     <div className="account-section">
       <h2>Shipping Addresses</h2>
       {success && <p className="account-muted">{success}</p>}
+      <button
+        className="account-btn"
+        type="button"
+        onClick={() => {
+          setMakeDefault(true);
+          setShowModal(true);
+        }}
+      >
+        Add new address
+      </button>
 
       {addresses.length === 0 && <p className="account-muted">No addresses yet.</p>}
 
@@ -111,75 +125,104 @@ const Shipping = () => {
         ))}
       </div>
 
-      <h3>Add New Address</h3>
-      <div className="account-card">
-        <form onSubmit={handleAddAddress} className="account-form">
-          <input
-            placeholder="Full Name"
-            value={newAddress.fullName}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, fullName: e.target.value })
-            }
-            required
-          />
-          <input
-            placeholder="Address Line 1"
-            value={newAddress.addressLine1}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, addressLine1: e.target.value })
-            }
-            required
-          />
-          <input
-            placeholder="Address Line 2"
-            value={newAddress.addressLine2}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, addressLine2: e.target.value })
-            }
-          />
-          <input
-            placeholder="City"
-            value={newAddress.city}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, city: e.target.value })
-            }
-            required
-          />
-          <input
-            placeholder="State"
-            value={newAddress.state}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, state: e.target.value })
-            }
-            required
-          />
-          <input
-            placeholder="Country"
-            value={newAddress.country}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, country: e.target.value })
-            }
-            required
-          />
-          <input
-            placeholder="Postal Code"
-            value={newAddress.postalCode}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, postalCode: e.target.value })
-            }
-            required
-          />
-          <input
-            placeholder="Phone"
-            value={newAddress.phone}
-            onChange={(e) =>
-              setNewAddress({ ...newAddress, phone: e.target.value })
-            }
-            required
-          />
-          <button type="submit" className="account-btn">Add Address</button>
-        </form>
-      </div>
+      {showModal && (
+        <div className="account-modal-overlay" onClick={() => setShowModal(false)}>
+          <div
+            className="account-modal"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="account-modal-header">
+              <h3>Add new address</h3>
+              <button
+                className="account-modal-close"
+                type="button"
+                onClick={() => setShowModal(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <form onSubmit={handleAddAddress} className="account-form account-modal-body">
+              <input
+                placeholder="Full Name"
+                value={newAddress.fullName}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, fullName: e.target.value })
+                }
+                required
+              />
+              <input
+                placeholder="Address Line 1"
+                value={newAddress.addressLine1}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, addressLine1: e.target.value })
+                }
+                required
+              />
+              <input
+                placeholder="Address Line 2"
+                value={newAddress.addressLine2}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, addressLine2: e.target.value })
+                }
+              />
+              <input
+                placeholder="City"
+                value={newAddress.city}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, city: e.target.value })
+                }
+                required
+              />
+              <input
+                placeholder="State"
+                value={newAddress.state}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, state: e.target.value })
+                }
+                required
+              />
+              <input
+                placeholder="Country"
+                value={newAddress.country}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, country: e.target.value })
+                }
+                required
+              />
+              <input
+                placeholder="Postal Code"
+                value={newAddress.postalCode}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, postalCode: e.target.value })
+                }
+                required
+              />
+              <input
+                placeholder="Phone"
+                value={newAddress.phone}
+                onChange={(e) =>
+                  setNewAddress({ ...newAddress, phone: e.target.value })
+                }
+                required
+              />
+              <label className="account-toggle">
+                <input
+                  type="checkbox"
+                  checked={makeDefault}
+                  onChange={(e) => setMakeDefault(e.target.checked)}
+                />
+                Set as default address
+              </label>
+              <div className="account-modal-actions">
+                <button type="button" className="account-btn outline" onClick={() => setShowModal(false)}>
+                  Cancel
+                </button>
+                <button type="submit" className="account-btn">Save address</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

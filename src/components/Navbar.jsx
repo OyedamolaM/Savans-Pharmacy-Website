@@ -20,7 +20,7 @@ const Navbar = () => {
       .replace(/\b\w/g, (char) => char.toUpperCase());
   const isAdmin = role === 'admin' || role === 'super_admin';
   const isStaff = ['branch_manager', 'accountant', 'inventory_manager', 'cashier', 'staff'].includes(role);
-  const isUser = role === 'user';
+  const isUser = role === 'customer';
   const [cartCount, setCartCount] = useState(0);
 
   useEffect(() => {

@@ -48,13 +48,82 @@
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  gap: 0.4rem;
 
   &:hover {
     background: $primary-dark;
   }
 }
 
+.account-btn.outline {
+  background: transparent;
+  color: $primary-color;
+  border: 1px solid $primary-color;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.04);
+  }
+}
+
 .account-muted {
+  color: $text-secondary;
+}
+
+.account-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  z-index: 2000;
+}
+
+.account-modal {
+  width: min(560px, 100%);
+  background: $surface-color;
+  border-radius: $border-radius;
+  box-shadow: $shadow-medium;
+  border: 1px solid $border-light;
+  overflow: hidden;
+}
+
+.account-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.2rem;
+  border-bottom: 1px solid $border-light;
+
+  h3 {
+    margin: 0;
+  }
+}
+
+.account-modal-close {
+  border: none;
+  background: transparent;
+  font-size: 1.1rem;
+  cursor: pointer;
+}
+
+.account-modal-body {
+  padding: 1.2rem;
+}
+
+.account-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  margin-top: 0.5rem;
+}
+
+.account-toggle {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: 0.9rem;
   color: $text-secondary;
 }
 

@@ -13,6 +13,8 @@ const Home = () => {
   const [cartCounts, setCartCounts] = useState({});
   const navigate = useNavigate();
 
+  const isCustomer = () => localStorage.getItem('role') === 'customer';
+
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -30,6 +32,10 @@ const Home = () => {
   }, []);
 
   const refreshCartCounts = async () => {
+    if (!isCustomer()) {
+      setCartCounts({});
+      return;
+    }
     try {
       const { data } = await getCart();
       const counts = {};
@@ -52,6 +58,11 @@ const Home = () => {
   }, []);
 
   const handleAddToCart = async (productId) => {
+    if (!isCustomer()) {
+      setNotice('Cart is available for customer accounts only.');
+      setTimeout(() => setNotice(''), 2000);
+      return;
+    }
     setAddingId(productId);
     setNotice('');
     try {

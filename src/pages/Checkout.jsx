@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { clearCart, createOrder, getCart, getProfile } from "../api/api";
+import { addShippingAddress, clearCart, createOrder, getCart, getProfile } from "../api/api";
 import "./Checkout.scss";
 
 const Checkout = () => {
@@ -8,6 +8,20 @@ const Checkout = () => {
   const [loading, setLoading] = useState(true);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [addresses, setAddresses] = useState([]);
+  const [showAddressModal, setShowAddressModal] = useState(false);
+  const [saveForFuture, setSaveForFuture] = useState(true);
+  const [makeDefault, setMakeDefault] = useState(true);
+  const [addressDraft, setAddressDraft] = useState({
+    fullName: "",
+    addressLine1: "",
+    addressLine2: "",
+    city: "",
+    state: "",
+    country: "",
+    postalCode: "",
+    phone: "",
+  });
   const [form, setForm] = useState({
     fullName: "",
     addressLine1: "",
@@ -42,6 +56,7 @@ const Checkout = () => {
     try {
       const { data } = await getProfile();
       const address = data.shippingAddresses?.[0];
+      setAddresses(data.shippingAddresses || []);
       if (address) {
         setForm((prev) => ({
           ...prev,
@@ -76,6 +91,43 @@ const Checkout = () => {
     setForm((prev) => ({ ...prev, [name]: value }));
   };
 
+  const openAddressModal = () => {
+    setAddressDraft({
+      fullName: form.fullName,
+      addressLine1: form.addressLine1,
+      addressLine2: form.addressLine2,
+      city: form.city,
+      state: form.state,
+      country: form.country,
+      postalCode: form.postalCode,
+      phone: form.phone,
+    });
+    setSaveForFuture(true);
+    setMakeDefault(true);
+    setShowAddressModal(true);
+  };
+
+  const handleSaveAddress = async (e) => {
+    e.preventDefault();
+    setError("");
+    setForm((prev) => ({ ...prev, ...addressDraft }));
+
+    if (saveForFuture) {
+      try {
+        const { data } = await addShippingAddress({
+          ...addressDraft,
+          saveAsNew: true,
+          makeDefault,
+        });
+        setAddresses(data || []);
+      } catch (err) {
+        console.error("Failed to save shipping address:", err);
+      }
+    }
+
+    setShowAddressModal(false);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
@@ -89,6 +141,12 @@ const Checkout = () => {
       }));
 
     try {
+      if (!form.fullName || !form.addressLine1 || !form.city || !form.state || !form.country || !form.postalCode || !form.phone) {
+        setError("Please add a delivery address before placing the order.");
+        setSubmitting(false);
+        return;
+      }
+
       const { data } = await createOrder({
         products,
         shippingAddress: {
@@ -149,63 +207,48 @@ const Checkout = () => {
       <div className="checkout-grid">
         <form className="checkout-form" onSubmit={handleSubmit}>
           <h2>Shipping Details</h2>
-          <div className="form-grid">
-            <input
-              name="fullName"
-              placeholder="Full Name"
-              value={form.fullName}
-              onChange={handleChange}
-              required
-            />
-            <input
-              name="phone"
-              placeholder="Phone Number"
-              value={form.phone}
-              onChange={handleChange}
-              required
-            />
-            <input
-              name="addressLine1"
-              placeholder="Address Line 1"
-              value={form.addressLine1}
-              onChange={handleChange}
-              required
-            />
-            <input
-              name="addressLine2"
-              placeholder="Address Line 2"
-              value={form.addressLine2}
-              onChange={handleChange}
-            />
-            <input
-              name="city"
-              placeholder="City"
-              value={form.city}
-              onChange={handleChange}
-              required
-            />
-            <input
-              name="state"
-              placeholder="State"
-              value={form.state}
-              onChange={handleChange}
-              required
-            />
-            <input
-              name="country"
-              placeholder="Country"
-              value={form.country}
-              onChange={handleChange}
-              required
-            />
-            <input
-              name="postalCode"
-              placeholder="Postal Code"
-              value={form.postalCode}
-              onChange={handleChange}
-              required
-            />
-          </div>
+          {form.addressLine1 ? (
+            <div className="checkout-address-card">
+              <strong>{form.fullName}</strong>
+              <span>{form.addressLine1} {form.addressLine2}</span>
+              <span>{form.city}, {form.state}, {form.country} - {form.postalCode}</span>
+              <span>Phone: {form.phone}</span>
+            </div>
+          ) : (
+            <p className="checkout-status">No delivery address yet.</p>
+          )}
+          {addresses.length > 1 && (
+            <div className="checkout-address-list">
+              {addresses.map((addr) => (
+                <label key={addr._id} className="checkout-radio">
+                  <input
+                    type="radio"
+                    name="selectedAddress"
+                    checked={addr.addressLine1 === form.addressLine1 && addr.postalCode === form.postalCode}
+                    onChange={() =>
+                      setForm((prev) => ({
+                        ...prev,
+                        fullName: addr.fullName,
+                        addressLine1: addr.addressLine1,
+                        addressLine2: addr.addressLine2,
+                        city: addr.city,
+                        state: addr.state,
+                        country: addr.country,
+                        postalCode: addr.postalCode,
+                        phone: addr.phone,
+                      }))
+                    }
+                  />
+                  <span>
+                    {addr.addressLine1}, {addr.city} ({addr.phone})
+                  </span>
+                </label>
+              ))}
+            </div>
+          )}
+          <button type="button" className="outline-btn checkout-address-btn" onClick={openAddressModal}>
+            Add or change address
+          </button>
 
           <h2>Payment Method</h2>
           <select
@@ -241,6 +284,122 @@ const Checkout = () => {
           </div>
         </aside>
       </div>
+
+      {showAddressModal && (
+        <div className="checkout-modal-overlay" onClick={() => setShowAddressModal(false)}>
+          <div className="checkout-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="checkout-modal-header">
+              <h3>Add delivery address</h3>
+              <button
+                type="button"
+                className="checkout-modal-close"
+                onClick={() => setShowAddressModal(false)}
+              >
+                ✕
+              </button>
+            </div>
+            <form className="checkout-modal-body" onSubmit={handleSaveAddress}>
+              <div className="form-grid">
+                <input
+                  name="fullName"
+                  placeholder="Full Name"
+                  value={addressDraft.fullName}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, fullName: e.target.value }))
+                  }
+                  required
+                />
+                <input
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={addressDraft.phone}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, phone: e.target.value }))
+                  }
+                  required
+                />
+                <input
+                  name="addressLine1"
+                  placeholder="Address Line 1"
+                  value={addressDraft.addressLine1}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, addressLine1: e.target.value }))
+                  }
+                  required
+                />
+                <input
+                  name="addressLine2"
+                  placeholder="Address Line 2"
+                  value={addressDraft.addressLine2}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, addressLine2: e.target.value }))
+                  }
+                />
+                <input
+                  name="city"
+                  placeholder="City"
+                  value={addressDraft.city}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, city: e.target.value }))
+                  }
+                  required
+                />
+                <input
+                  name="state"
+                  placeholder="State"
+                  value={addressDraft.state}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, state: e.target.value }))
+                  }
+                  required
+                />
+                <input
+                  name="country"
+                  placeholder="Country"
+                  value={addressDraft.country}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, country: e.target.value }))
+                  }
+                  required
+                />
+                <input
+                  name="postalCode"
+                  placeholder="Postal Code"
+                  value={addressDraft.postalCode}
+                  onChange={(e) =>
+                    setAddressDraft((prev) => ({ ...prev, postalCode: e.target.value }))
+                  }
+                  required
+                />
+              </div>
+              <label className="checkout-toggle">
+                <input
+                  type="checkbox"
+                  checked={saveForFuture}
+                  onChange={(e) => setSaveForFuture(e.target.checked)}
+                />
+                Save address to my account
+              </label>
+              <label className="checkout-toggle">
+                <input
+                  type="checkbox"
+                  checked={makeDefault}
+                  onChange={(e) => setMakeDefault(e.target.checked)}
+                />
+                Set as default address
+              </label>
+              <div className="checkout-modal-actions">
+                <button type="button" className="outline-btn" onClick={() => setShowAddressModal(false)}>
+                  Cancel
+                </button>
+                <button type="submit" className="primary-btn">
+                  Save address
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

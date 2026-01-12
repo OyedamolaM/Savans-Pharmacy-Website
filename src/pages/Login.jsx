@@ -14,7 +14,7 @@ const Login = () => {
       const res = await loginUser({ email, password });
       // Save token and role
       localStorage.setItem('token', res.data.token);
-      localStorage.setItem('role', res.data.role); // "user" or "admin"
+      localStorage.setItem('role', res.data.role); // "customer" or staff/admin
       localStorage.setItem('name', res.data.name);
 
       // Redirect based on role

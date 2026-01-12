@@ -36,7 +36,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
     email: "",
     password: "",
     phone: "",
-    role: "user",
+    role: "customer",
     branchId: "",
     region: "",
   });
@@ -83,7 +83,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
     setViewMode(defaultView);
     setNewUser((prev) => ({
       ...prev,
-      role: defaultView === "staff" ? "cashier" : "user",
+      role: defaultView === "staff" ? "cashier" : "customer",
     }));
   }, [defaultView]);
 
@@ -159,7 +159,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
         email: "",
         password: "",
         phone: "",
-        role: "user",
+        role: "customer",
         branchId: "",
         region: "",
       });
@@ -177,7 +177,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
       email: user.email || "",
       password: "",
       phone: user.phone || "",
-      role: user.role || "user",
+      role: user.role || "customer",
       branchId: user.branch?._id || "",
       region: user.region || "",
     });
@@ -222,7 +222,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
             className={viewMode === "customers" ? "active" : ""}
             onClick={() => {
               setViewMode("customers");
-              setNewUser((prev) => ({ ...prev, role: "user" }));
+              setNewUser((prev) => ({ ...prev, role: "customer" }));
             }}
           >
             Customers
@@ -346,7 +346,7 @@ const Users = ({ defaultView = "customers", showToggle = true }) => {
                   />
                 </>
               ) : (
-                <input type="hidden" value="user" />
+                <input type="hidden" value="customer" />
               )}
 
               <button type="submit">Create</button>
