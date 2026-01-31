@@ -1,0 +1,147 @@
+@import '../styles/global.scss';
+
+.product-detail {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 1.5rem;
+  background: $surface-color;
+  border-radius: 24px;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-light;
+  margin: 2rem 1.5rem;
+}
+
+.product-detail__media img {
+  width: 100%;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: $shadow-light;
+}
+
+.product-detail__content {
+  display: grid;
+  gap: 1rem;
+
+  h1 {
+    font-size: 2rem;
+  }
+}
+
+.product-detail__category {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $primary-color;
+  font-weight: 600;
+}
+
+.product-detail__desc {
+  color: $text-secondary;
+}
+
+.product-detail__rating {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  .stars {
+    display: inline-flex;
+    gap: 2px;
+  }
+
+  .star {
+    color: $primary-color;
+  }
+
+  .star.muted {
+    color: $border-dark;
+  }
+
+  .rating-count {
+    color: $text-secondary;
+  }
+}
+
+.product-detail__price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: $primary-color;
+}
+
+.product-detail__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: center;
+}
+
+.product-detail__notice {
+  color: $accent-color;
+  font-weight: 600;
+}
+
+.product-detail__status {
+  text-align: center;
+  padding: 3rem 1rem;
+  font-weight: 600;
+  color: $text-secondary;
+}
+
+.qty-control {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: $background-color;
+  border: 1px solid $border-color;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+
+  button {
+    background: transparent;
+    border: none;
+    font-size: 1.1rem;
+    padding: 0 0.4rem;
+    color: $primary-color;
+  }
+
+  input {
+    width: 70px;
+    text-align: center;
+    border: none;
+    background: transparent;
+    font-weight: 600;
+    font-size: 0.9rem;
+    appearance: textfield;
+  }
+}
+
+.add-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: none;
+  background: $primary-color;
+  color: $text-inverse;
+  padding: 0.6rem 1.2rem;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+}
+
+.cart-count-pill {
+  font-size: 0.75rem;
+  color: $text-secondary;
+  background: $background-color;
+  border: 1px solid $border-light;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  width: fit-content;
+}

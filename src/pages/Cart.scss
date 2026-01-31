@@ -12,18 +12,19 @@
   gap: 1.5rem;
   padding: 1.5rem;
   border-radius: $border-radius;
-  background: linear-gradient(120deg, $primary-color, $primary-light);
-  color: $text-inverse;
-  box-shadow: $shadow-medium;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(246, 240, 255, 0.95));
+  color: $text-primary;
+  border: 1px solid $border-color;
+  box-shadow: $shadow-light;
 
   h1 {
     margin-bottom: 0.4rem;
-    color: $text-inverse;
+    color: $text-primary;
     font-weight: 700;
   }
 
   p {
-    color: rgba(255, 255, 255, 0.85);
+    color: $text-secondary;
   }
 }
 
@@ -72,6 +73,7 @@
   background: $surface-color;
   border-radius: $border-radius;
   padding: 1rem;
+  border: 1px solid $border-color;
   box-shadow: $shadow-light;
 
   img {
@@ -149,6 +151,7 @@
   background: $surface-color;
   border-radius: $border-radius;
   padding: 1.5rem;
+  border: 1px solid $border-color;
   box-shadow: $shadow-light;
 
   h2 {
@@ -181,21 +184,22 @@ button:disabled {
 }
 
 .primary-btn {
-  background: $accent-color;
+  background: $primary-color;
   color: $text-inverse;
 
   &:hover {
-    background: $accent-dark;
+    background: $primary-dark;
   }
 }
 
 .outline-btn {
   background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  color: $text-inverse;
+  border: 1px solid $border-color;
+  color: $text-primary;
 
   &:hover {
-    border-color: $text-inverse;
+    border-color: $primary-color;
+    color: $primary-color;
   }
 }
 

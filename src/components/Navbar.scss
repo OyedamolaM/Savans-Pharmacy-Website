@@ -8,8 +8,10 @@
   align-items: center;
   padding: $space-sm $space-lg;
   border-bottom: 1px solid $border-color;
-  position: relative;
+  position: sticky;
+  top: 0;
   z-index: $z-dropdown;
+  box-shadow: 0 8px 24px rgba(31, 23, 49, 0.06);
 
   .logo a {
     font-size: 22px;
@@ -38,6 +40,37 @@
           color: $accent-color;
         }
       }
+    }
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .search-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 999px;
+    border: 1px solid $border-color;
+    background: $surface-color;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: $text-secondary;
+    }
+
+    input {
+      border: none;
+      padding: 0;
+      background: transparent;
+      min-width: 140px;
+      color: $text-primary;
+      font-size: 0.9rem;
     }
   }
 
@@ -197,6 +230,14 @@
   .navbar {
     .hamburger {
       display: flex;
+    }
+
+    .nav-actions {
+      gap: 0.4rem;
+    }
+
+    .search-pill {
+      display: none;
     }
 
     ul.nav-links {

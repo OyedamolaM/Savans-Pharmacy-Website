@@ -1,5 +1,6 @@
 import React from "react";
 import { Link, Outlet, useNavigate } from "react-router-dom";
+import SubscribeModal from "../../components/SubscribeModal";
 import "./dashboard.scss";
 
 const DashboardLayout = () => {
@@ -17,7 +18,7 @@ const DashboardLayout = () => {
     <div className="dashboard-container">
       {/* Sidebar */}
       <aside className="dashboard-sidebar">
-        <h2>Savans Account</h2>
+        <h2>supplements.ng</h2>
 
         <nav>
           <Link to="/">Back to Store</Link>
@@ -38,6 +39,7 @@ const DashboardLayout = () => {
       <main className="dashboard-main">
         <Outlet />
       </main>
+      <SubscribeModal delayMs={30000} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
@@ -7,6 +7,7 @@ import CheckoutSuccess from './pages/CheckoutSuccess';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Home from './pages/Home';
+import ProductDetail from './pages/ProductDetail';
 import Dashboard from './pages/Customer/Dashboard';
 import AdminDashboard from './pages/Admin/AdminDashboard';
 import StaffDashboard from './pages/Staff/StaffDashboard';
@@ -15,12 +16,18 @@ import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
 
 const App = () => {
+  const { pathname } = useLocation();
+  const hideFooter = pathname.startsWith('/dashboard')
+    || pathname.startsWith('/admin')
+    || pathname.startsWith('/staff');
+
   return (
     <>
       <Navbar />
 
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/product/:id" element={<ProductDetail />} />
         <Route
           path="/cart"
           element={
@@ -87,7 +94,7 @@ const App = () => {
         />
       </Routes>
 
-      <Footer />
+      {!hideFooter && <Footer />}
     </>
   );
 };

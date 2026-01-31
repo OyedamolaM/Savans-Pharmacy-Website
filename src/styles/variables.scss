@@ -4,29 +4,29 @@
 /* ================= COLORS ================= */
 
 /* Primary Colors */
-$primary-color: #4e0781;        // main purple
-$primary-light: #6a21a0;        // lighter purple for hover/background
-$primary-dark: #35055a;         // darker purple for buttons/hover
+$primary-color: #6f2dbd;        // main purple
+$primary-light: #8f4de3;        // lighter purple for hover/background
+$primary-dark: #4a148c;         // darker purple for buttons/hover
 
 /* Accent / Secondary */
-$accent-color: #e90979;         // pink highlight
-$accent-light: lighten($accent-color, 20%);
-$accent-dark: darken($accent-color, 10%);
+$accent-color: #7b2cbf;         // purple accent
+$accent-light: lighten($accent-color, 22%);
+$accent-dark: darken($accent-color, 12%);
 
 /* Backgrounds / Surfaces */
-$background-color: #ffffff;     // main page background
-$surface-color: #f9f9f9;        // cards, sections
-$overlay-color: rgba(0, 0, 0, 0.05); // subtle overlay for modals/cards
+$background-color: #f7f4fb;     // main page background
+$surface-color: #ffffff;        // cards, sections
+$overlay-color: rgba(17, 8, 34, 0.06); // subtle overlay for modals/cards
 
 /* Borders / Lines */
-$border-color: #e0e0e0;         // default borders
-$border-light: #f0f0f0;         // lighter border for subtle separation
-$border-dark: #c0c0c0;          // stronger border for cards, inputs
+$border-color: #e4e0ef;         // default borders
+$border-light: #f1edf9;         // lighter border for subtle separation
+$border-dark: #cfc7e6;          // stronger border for cards, inputs
 
 /* Text Colors */
-$text-primary: #333333;         // main text
-$text-secondary: #777777;       // muted text
-$text-light: #aaaaaa;           // subtle text (placeholder)
+$text-primary: #1f1d2b;         // main text
+$text-secondary: #6b6880;       // muted text
+$text-light: #9d99b3;           // subtle text (placeholder)
 $text-inverse: #ffffff;         // text on primary/accent backgrounds
 
 /* State Colors */
@@ -36,7 +36,7 @@ $error-color: #dc3545;          // error messages
 $info-color: #17a2b8;           // info messages, alerts
 
 /* 🎯 Typography */
-$font-primary: 'Roboto', sans-serif;
+$font-primary: 'Sora', 'Space Grotesk', sans-serif;
 
 $font-size-xs: 12px;
 $font-size-sm: 14px;

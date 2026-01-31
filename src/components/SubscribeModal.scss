@@ -1,0 +1,51 @@
+@import '../styles/global.scss';
+
+.subscribe-modal {
+  position: fixed;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  z-index: $z-modal;
+}
+
+.subscribe-modal__backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(17, 8, 34, 0.45);
+  border: none;
+}
+
+.subscribe-modal__panel {
+  position: relative;
+  background: $surface-color;
+  padding: 2rem;
+  border-radius: 20px;
+  max-width: 460px;
+  width: calc(100% - 2rem);
+  border: 1px solid $border-color;
+  box-shadow: $shadow-medium;
+  display: grid;
+  gap: 1rem;
+}
+
+.subscribe-modal__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.subscribe-modal__form {
+  display: grid;
+  gap: 0.8rem;
+
+  input {
+    border-radius: 999px;
+  }
+
+  button {
+    @include button($primary-color);
+    border-radius: 999px;
+    font-weight: 600;
+  }
+}
